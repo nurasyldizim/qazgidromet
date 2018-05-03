@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03.05.2018 23:28:22 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.PnzData" table="pnz_data" catalog="nmudb" optimistic-lock="version">
+        <id name="pnzDataId" type="java.lang.Integer">
+            <column name="pnz_dataID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pnz" class="model.Pnz" fetch="select">
+            <column name="pnzID" not-null="true" />
+        </many-to-one>
+        <property name="pnzDateTime" type="timestamp">
+            <column name="pnzDateTime" length="19" not-null="true" />
+        </property>
+        <property name="bsh" type="java.lang.Double">
+            <column name="bSh" precision="22" scale="0" />
+        </property>
+        <property name="ds" type="java.lang.Double">
+            <column name="dS" precision="22" scale="0" />
+        </property>
+        <property name="sr" type="java.lang.Double">
+            <column name="sR" precision="22" scale="0" />
+        </property>
+        <property name="ou" type="java.lang.Double">
+            <column name="oU" precision="22" scale="0" />
+        </property>
+        <property name="do_" type="java.lang.Double">
+            <column name="dO" precision="22" scale="0" />
+        </property>
+        <property name="oa" type="java.lang.Double">
+            <column name="oA" precision="22" scale="0" />
+        </property>
+        <property name="ozon" type="java.lang.Double">
+            <column name="ozon" precision="22" scale="0" />
+        </property>
+        <property name="serovodorod" type="java.lang.Double">
+            <column name="serovodorod" precision="22" scale="0" />
+        </property>
+        <property name="fenol" type="java.lang.Double">
+            <column name="fenol" precision="22" scale="0" />
+        </property>
+        <property name="fv" type="java.lang.Double">
+            <column name="fV" precision="22" scale="0" />
+        </property>
+        <property name="hlor" type="java.lang.Double">
+            <column name="hlor" precision="22" scale="0" />
+        </property>
+        <property name="hv" type="java.lang.Double">
+            <column name="hV" precision="22" scale="0" />
+        </property>
+        <property name="ammiak" type="java.lang.Double">
+            <column name="ammiak" precision="22" scale="0" />
+        </property>
+        <property name="skIs" type="java.lang.Double">
+            <column name="skIs" precision="22" scale="0" />
+        </property>
+        <property name="formaldigid" type="java.lang.Double">
+            <column name="formaldigid" precision="22" scale="0" />
+        </property>
+        <property name="nsm" type="java.lang.Double">
+            <column name="nSM" precision="22" scale="0" />
+        </property>
+        <property name="hromSh" type="java.lang.Double">
+            <column name="hromSh" precision="22" scale="0" />
+        </property>
+        <property name="sumU" type="java.lang.Double">
+            <column name="sumU" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

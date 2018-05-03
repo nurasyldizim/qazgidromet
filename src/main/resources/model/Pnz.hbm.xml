@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03.05.2018 23:28:22 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Pnz" table="pnz" catalog="nmudb" optimistic-lock="version">
+        <id name="pnzId" type="int">
+            <column name="pnzID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="city" class="model.City" fetch="select">
+            <column name="city_id" not-null="true" />
+        </many-to-one>
+        <property name="pnzName" type="string">
+            <column name="pnzName" length="45" not-null="true" />
+        </property>
+        <set name="pnzDatas" table="pnz_data" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pnzID" not-null="true" />
+            </key>
+            <one-to-many class="model.PnzData" />
+        </set>
+    </class>
+</hibernate-mapping>
