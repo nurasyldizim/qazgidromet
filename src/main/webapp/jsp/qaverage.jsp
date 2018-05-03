@@ -6,7 +6,6 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.net.URLEncoder"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.time.Year"%>
 <%@page import="java.util.ArrayList"%>

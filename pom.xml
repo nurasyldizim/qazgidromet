@@ -26,12 +26,10 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        
-                          <!-- Hibernate 4.3.6 Final -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.1.Final</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <!-- Mysql Connector -->
         <dependency>
@@ -89,6 +87,7 @@
                 </executions>
             </plugin>
         </plugins>
+        <finalName>ROOT</finalName>
     </build>
 
 </project>
