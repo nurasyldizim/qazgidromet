@@ -196,66 +196,42 @@
                 <td id="19id"><script>calculateQAvgToP(19);</script></td> 
             </tr>
             <%
-               int counter = 0;
                double[] array = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-               ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listQAvgToPP(date); 
+               boolean []check = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+               ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listQAvgToPP(date, cityId); 
             for (int i = 0; i<4; i++) {
                     Iterator iterQAvgList = pnzDatalist[i].iterator();
                     Object[] temp = (Object[]) iterQAvgList.next();
-                    System.out.println(temp.length);
-                    System.out.println("check 1");
-                    if(temp[0]!=null){
-                        counter++;
                         for(int j =0; j<18; j++){
-                        array[j] = array[j] + (Double)temp[j];
-                        System.out.println(array[j]);
+                            if(temp[j]!=null){
+                                array[j] = array[j] + (Double)temp[j];
+                            }else{
+                                check[j]=false;
+                            }
                     }
-                    }
-                    System.out.println("check 2");
             }
             %>
             <tr>
                 <td></td>
                 <td>q ср.сезон  ПНЗ</td>
-                <%if(counter==4){%>
-                <td><%=array[0]/4%></td>
-                <td><%=array[1]/4%></td>
-                <td><%=array[2]/4%></td>
-                <td><%=array[3]/4%></td>
-                <td><%=array[4]/4%></td>
-                <td><%=array[5]/4%></td>
-                <td><%=array[6]/4%></td>
-                <td><%=array[7]/4%></td>
-                <td><%=array[8]/4%></td>
-                <td><%=array[9]/4%></td>
-                <td><%=array[10]/4%></td>
-                <td><%=array[11]/4%></td>
-                <td><%=array[12]/4%></td>
-                <td><%=array[13]/4%></td>
-                <td><%=array[14]/4%></td>
-                <td><%=array[15]/4%></td>
-                <td><%=array[16]/4%></td>
-                <td><%=array[17]/4%></td>
-                <%}else{%>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <%}%>  
+                <td><%=((check[0]==false)? null : array[0]/4)%></td>
+                <td><%=((check[1]==false)? null : array[1]/4)%></td>
+                <td><%=((check[2]==false)? null : array[2]/4)%></td>
+                <td><%=((check[3]==false)? null : array[3]/4)%></td>
+                <td><%=((check[4]==false)? null : array[4]/4)%></td>
+                <td><%=((check[5]==false)? null : array[5]/4)%></td>
+                <td><%=((check[6]==false)? null : array[6]/4)%></td>
+                <td><%=((check[7]==false)? null : array[7]/4)%></td>
+                <td><%=((check[8]==false)? null : array[8]/4)%></td>
+                <td><%=((check[9]==false)? null : array[9]/4)%></td>
+                <td><%=((check[10]==false)? null : array[10]/4)%></td>
+                <td><%=((check[11]==false)? null : array[11]/4)%></td>
+                <td><%=((check[12]==false)? null : array[12]/4)%></td>
+                <td><%=((check[13]==false)? null : array[13]/4)%></td>
+                <td><%=((check[14]==false)? null : array[14]/4)%></td>
+                <td><%=((check[15]==false)? null : array[15]/4)%></td>
+                <td><%=((check[16]==false)? null : array[16]/4)%></td>
+                <td><%=((check[17]==false)? null : array[17]/4)%></td> 
             </tr>
             <tr>
                 <td></td>
@@ -387,24 +363,24 @@
             <tr>
                 <td>Число случаев</td>
                 <td id="pdkN"><script>countPdkN();</script></td>
-                <td id="eachPdkN2"><script>countEachPdkN(2)</script></td>
-                <td id="eachPdkN3"><script>countEachPdkN(3)</script></td>
-                <td id="eachPdkN4"><script>countEachPdkN(4)</script></td>
-                <td id="eachPdkN5"><script>countEachPdkN(5)</script></td>
-                <td id="eachPdkN6"><script>countEachPdkN(6)</script></td>
-                <td id="eachPdkN7"><script>countEachPdkN(7)</script></td>
-                <td id="eachPdkN8"><script>countEachPdkN(8)</script></td>
-                <td id="eachPdkN9"><script>countEachPdkN(9)</script></td>
-                <td id="eachPdkN10"><script>countEachPdkN(10)</script></td>
-                <td id="eachPdkN11"><script>countEachPdkN(11)</script></td>
-                <td id="eachPdkN12"><script>countEachPdkN(12)</script></td>
-                <td id="eachPdkN13"><script>countEachPdkN(13)</script></td>
-                <td id="eachPdkN14"><script>countEachPdkN(14)</script></td>
-                <td id="eachPdkN15"><script>countEachPdkN(15)</script></td>
-                <td id="eachPdkN16"><script>countEachPdkN(16)</script></td>
-                <td id="eachPdkN17"><script>countEachPdkN(17)</script></td>
-                <td id="eachPdkN18"><script>countEachPdkN(18)</script></td>
-                <td id="eachPdkN19"><script>countEachPdkN(19)</script></td>
+                <td id="eachPdkN2"><script>countEachPdkN(2);</script></td>
+                <td id="eachPdkN3"><script>countEachPdkN(3);</script></td>
+                <td id="eachPdkN4"><script>countEachPdkN(4);</script></td>
+                <td id="eachPdkN5"><script>countEachPdkN(5);</script></td>
+                <td id="eachPdkN6"><script>countEachPdkN(6);</script></td>
+                <td id="eachPdkN7"><script>countEachPdkN(7);</script></td>
+                <td id="eachPdkN8"><script>countEachPdkN(8);</script></td>
+                <td id="eachPdkN9"><script>countEachPdkN(9);</script></td>
+                <td id="eachPdkN10"><script>countEachPdkN(10);</script></td>
+                <td id="eachPdkN11"><script>countEachPdkN(11);</script></td>
+                <td id="eachPdkN12"><script>countEachPdkN(12);</script></td>
+                <td id="eachPdkN13"><script>countEachPdkN(13);</script></td>
+                <td id="eachPdkN14"><script>countEachPdkN(14);</script></td>
+                <td id="eachPdkN15"><script>countEachPdkN(15);</script></td>
+                <td id="eachPdkN16"><script>countEachPdkN(16);</script></td>
+                <td id="eachPdkN17"><script>countEachPdkN(17);</script></td>
+                <td id="eachPdkN18"><script>countEachPdkN(18);</script></td>
+                <td id="eachPdkN19"><script>countEachPdkN(19);</script></td>
             </tr>
             </table>
             <br>

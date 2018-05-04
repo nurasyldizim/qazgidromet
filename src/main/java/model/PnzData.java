@@ -13,24 +13,24 @@ public class PnzData  implements java.io.Serializable {
      private Integer pnzDataId;
      private Pnz pnz;
      private Date pnzDateTime;
-     private double bsh;
-     private double ds;
-     private double sr;
-     private double ou;
-     private double do_;
-     private double oa;
-     private double ozon;
-     private double serovodorod;
-     private double fenol;
-     private double fv;
-     private double hlor;
-     private double hv;
-     private double ammiak;
-     private double skIs;
-     private double formaldigid;
-     private double nsm;
-     private double hromSh;
-     private double sumU;
+     private Double bsh;
+     private Double ds;
+     private Double sr;
+     private Double ou;
+     private Double do_;
+     private Double oa;
+     private Double ozon;
+     private Double serovodorod;
+     private Double fenol;
+     private Double fv;
+     private Double hlor;
+     private Double hv;
+     private Double ammiak;
+     private Double skIs;
+     private Double formaldigid;
+     private Double nsm;
+     private Double hromSh;
+     private Double sumU;
 
     /**
      *
@@ -59,7 +59,7 @@ public class PnzData  implements java.io.Serializable {
      * @param hromSh
      * @param sumU
      */
-    public PnzData(double bsh, double ds, double sr, double ou, double do_, double oa, double ozon, double serovodorod, double fenol, double fv, double hlor, double hv, double ammiak, double skIs, double formaldigid, double nsm, double hromSh, double sumU) {
+    public PnzData(Double bsh, Double ds, Double sr, Double ou, Double do_, Double oa, Double ozon, Double serovodorod, Double fenol, Double fv, Double hlor, Double hv, Double ammiak, Double skIs, Double formaldigid, Double nsm, Double hromSh, Double sumU) {
        this.bsh = bsh;
        this.ds = ds;
        this.sr = sr;
@@ -104,7 +104,7 @@ public class PnzData  implements java.io.Serializable {
      * @param hromSh
      * @param sumU
      */
-    public PnzData(int pnzDataId, Pnz pnz, Date pnzDateTime, double bsh, double ds, double sr, double ou, double do_, double oa, double ozon, double serovodorod, double fenol, double fv, double hlor, double hv, double ammiak, double skIs, double formaldigid, double nsm, double hromSh, double sumU) {
+    public PnzData(int pnzDataId, Pnz pnz, Date pnzDateTime, Double bsh, Double ds, Double sr, Double ou, Double do_, Double oa, Double ozon, Double serovodorod, Double fenol, Double fv, Double hlor, Double hv, Double ammiak, Double skIs, Double formaldigid, Double nsm, Double hromSh, Double sumU) {
        this.pnzDataId = pnzDataId;
        this.pnz = pnz;
        this.pnzDateTime = pnzDateTime;
@@ -151,7 +151,7 @@ public class PnzData  implements java.io.Serializable {
      * @param hromSh
      * @param sumU
      */
-    public PnzData(Pnz pnz, Date pnzDateTime, double bsh, double ds, double sr, double ou, double do_, double oa, double ozon, double serovodorod, double fenol, double fv, double hlor, double hv, double ammiak, double skIs, double formaldigid, double nsm, double hromSh, double sumU) {
+    public PnzData(Pnz pnz, Date pnzDateTime, Double bsh, Double ds, Double sr, Double ou, Double do_, Double oa, Double ozon, Double serovodorod, Double fenol, Double fv, Double hlor, Double hv, Double ammiak, Double skIs, Double formaldigid, Double nsm, Double hromSh, Double sumU) {
        this.pnz = pnz;
        this.pnzDateTime = pnzDateTime;
        this.bsh = bsh;
@@ -226,7 +226,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getBsh() {
+    public Double getBsh() {
         return this.bsh;
     }
     
@@ -234,7 +234,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param bsh
      */
-    public void setBsh(double bsh) {
+    public void setBsh(Double bsh) {
         this.bsh = bsh;
     }
 
@@ -242,7 +242,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getDs() {
+    public Double getDs() {
         return this.ds;
     }
     
@@ -250,7 +250,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param ds
      */
-    public void setDs(double ds) {
+    public void setDs(Double ds) {
         this.ds = ds;
     }
 
@@ -258,7 +258,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getSr() {
+    public Double getSr() {
         return this.sr;
     }
     
@@ -266,7 +266,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param sr
      */
-    public void setSr(double sr) {
+    public void setSr(Double sr) {
         this.sr = sr;
     }
 
@@ -274,7 +274,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getOu() {
+    public Double getOu() {
         return this.ou;
     }
     
@@ -282,7 +282,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param ou
      */
-    public void setOu(double ou) {
+    public void setOu(Double ou) {
         this.ou = ou;
     }
 
@@ -290,7 +290,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getDo_() {
+    public Double getDo_() {
         return this.do_;
     }
     
@@ -298,7 +298,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param do_
      */
-    public void setDo_(double do_) {
+    public void setDo_(Double do_) {
         this.do_ = do_;
     }
 
@@ -306,7 +306,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getOa() {
+    public Double getOa() {
         return this.oa;
     }
     
@@ -314,7 +314,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param oa
      */
-    public void setOa(double oa) {
+    public void setOa(Double oa) {
         this.oa = oa;
     }
 
@@ -322,7 +322,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getOzon() {
+    public Double getOzon() {
         return this.ozon;
     }
     
@@ -330,7 +330,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param ozon
      */
-    public void setOzon(double ozon) {
+    public void setOzon(Double ozon) {
         this.ozon = ozon;
     }
 
@@ -338,7 +338,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getSerovodorod() {
+    public Double getSerovodorod() {
         return this.serovodorod;
     }
     
@@ -346,7 +346,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param serovodorod
      */
-    public void setSerovodorod(double serovodorod) {
+    public void setSerovodorod(Double serovodorod) {
         this.serovodorod = serovodorod;
     }
 
@@ -354,7 +354,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getFenol() {
+    public Double getFenol() {
         return this.fenol;
     }
     
@@ -362,7 +362,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param fenol
      */
-    public void setFenol(double fenol) {
+    public void setFenol(Double fenol) {
         this.fenol = fenol;
     }
 
@@ -370,7 +370,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getFv() {
+    public Double getFv() {
         return this.fv;
     }
     
@@ -378,7 +378,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param fv
      */
-    public void setFv(double fv) {
+    public void setFv(Double fv) {
         this.fv = fv;
     }
 
@@ -386,7 +386,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getHlor() {
+    public Double getHlor() {
         return this.hlor;
     }
     
@@ -394,7 +394,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param hlor
      */
-    public void setHlor(double hlor) {
+    public void setHlor(Double hlor) {
         this.hlor = hlor;
     }
 
@@ -402,7 +402,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getHv() {
+    public Double getHv() {
         return this.hv;
     }
     
@@ -410,7 +410,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param hv
      */
-    public void setHv(double hv) {
+    public void setHv(Double hv) {
         this.hv = hv;
     }
 
@@ -418,7 +418,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getAmmiak() {
+    public Double getAmmiak() {
         return this.ammiak;
     }
     
@@ -426,7 +426,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param ammiak
      */
-    public void setAmmiak(double ammiak) {
+    public void setAmmiak(Double ammiak) {
         this.ammiak = ammiak;
     }
 
@@ -434,7 +434,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getSkIs() {
+    public Double getSkIs() {
         return this.skIs;
     }
     
@@ -442,7 +442,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param skIs
      */
-    public void setSkIs(double skIs) {
+    public void setSkIs(Double skIs) {
         this.skIs = skIs;
     }
 
@@ -450,7 +450,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getFormaldigid() {
+    public Double getFormaldigid() {
         return this.formaldigid;
     }
     
@@ -458,7 +458,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param formaldigid
      */
-    public void setFormaldigid(double formaldigid) {
+    public void setFormaldigid(Double formaldigid) {
         this.formaldigid = formaldigid;
     }
 
@@ -466,7 +466,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getNsm() {
+    public Double getNsm() {
         return this.nsm;
     }
     
@@ -474,7 +474,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param nsm
      */
-    public void setNsm(double nsm) {
+    public void setNsm(Double nsm) {
         this.nsm = nsm;
     }
 
@@ -482,7 +482,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getHromSh() {
+    public Double getHromSh() {
         return this.hromSh;
     }
     
@@ -490,7 +490,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param hromSh
      */
-    public void setHromSh(double hromSh) {
+    public void setHromSh(Double hromSh) {
         this.hromSh = hromSh;
     }
 
@@ -498,7 +498,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @return
      */
-    public double getSumU() {
+    public Double getSumU() {
         return this.sumU;
     }
     
@@ -506,7 +506,7 @@ public class PnzData  implements java.io.Serializable {
      *
      * @param sumU
      */
-    public void setSumU(double sumU) {
+    public void setSumU(Double sumU) {
         this.sumU = sumU;
     }
 
