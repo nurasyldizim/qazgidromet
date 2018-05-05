@@ -4,6 +4,7 @@
     Author     : Dizim Nurasyl
 --%>
 
+<%@page import="java.time.Year"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.net.URLEncoder"%>
@@ -34,10 +35,12 @@
     </head>
     <header><%
                     request.setCharacterEncoding("UTF-8");
+                    int year = Year.now().getValue();
                     String pnzName = request.getParameter("pnzName");
                     String pnzId = request.getParameter("pnzId");
                     String date = request.getParameter("date");
                     int cityId = Integer.parseInt(request.getParameter("cityId"));
+                    String cityName = request.getParameter("cityName");
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.now();
                 %>
@@ -48,16 +51,20 @@
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
                                     <li><a href="../">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>">Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>" class="active">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>">Фактический P</a></li>
+					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
+					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
+					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
+                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Прогностический P</a></li>
+                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
-    <body>        
+                            <center>
+                                <div class="neato-header">
+                                    <h1><%=cityName%></h1>
+                                </div>
+                            </center>
    <div class="date-picker">
 	<div class="input">
             <div class="result">Дата: <span><%= date %></span></div>
@@ -397,13 +404,13 @@
   </div>
             <script type="text/javascript" src="../js/indicator.js"></script>
 
-    </body>
-    <footer>
+
+	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>IITU 2018 <a href="#">Qazgidromet</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
 					</div>
 				</div>
 			</div>

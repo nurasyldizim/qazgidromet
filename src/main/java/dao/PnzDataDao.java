@@ -124,16 +124,10 @@ public class PnzDataDao {
      * @param month
      * @return
      */
-    public List<PnzData> listPnzDatas(int pnzId, int month ){
+    public List<PnzData> listPnzDatas(int pnzId, int month, int year ){
       List<PnzData> pnzData = new ArrayList<PnzData>();
       Session session = sessionFactory.openSession();
       Transaction tx = null;
-      Date date = new Date();
-      int year = Year.now().getValue();
-      int monthCurrent = date.getMonth()+1;
-      if(month > monthCurrent){
-          year = year-1;
-      }
       try {
          tx = session.beginTransaction();
          Query query = session.createQuery("FROM PnzData WHERE pnzID = :pnzId AND MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year");
@@ -178,16 +172,10 @@ public class PnzDataDao {
      * @param month
      * @return
      */
-    public List minPnzDatas(int pnzId, int month ){
+    public List minPnzDatas(int pnzId, int month,int year ){
       List pnzData = new ArrayList();
       Session session = sessionFactory.openSession();
       Transaction tx = null;
-      Date date = new Date();
-      int year = Year.now().getValue();
-      int monthCurrent = date.getMonth()+ 1;
-      if(month > monthCurrent){
-          year = year-1;
-      }
       try {
          tx = session.beginTransaction();
          Query query = session.createQuery("SELECT min(pnzdata.bsh), min(pnzdata.ds), min(pnzdata.sr), min(pnzdata.ou), min(pnzdata.do_), min(pnzdata.oa), min(pnzdata.ozon), min(pnzdata.serovodorod), min(pnzdata.fenol), min(pnzdata.fv), min(pnzdata.hlor), min(pnzdata.hv), min(pnzdata.ammiak), min(pnzdata.skIs), min(pnzdata.formaldigid), min(pnzdata.nsm), min(pnzdata.hromSh), min(pnzdata.sumU) FROM PnzData pnzdata WHERE pnzID = :pnzId AND MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year");
@@ -211,16 +199,10 @@ public class PnzDataDao {
      * @param month
      * @return
      */
-    public List maxPnzDatas(int pnzId, int month ){
+    public List maxPnzDatas(int pnzId, int month, int year ){
       List pnzData = new ArrayList();
       Session session = sessionFactory.openSession();
       Transaction tx = null;
-      Date date = new Date();
-      int year = Year.now().getValue();
-      int monthCurrent = date.getMonth()+1;
-      if(month > monthCurrent){
-          year = year-1;
-      }
       try {
          tx = session.beginTransaction();
          Query query = session.createQuery("SELECT max(pnzdata.bsh), max(pnzdata.ds), max(pnzdata.sr), max(pnzdata.ou), max(pnzdata.do_), max(pnzdata.oa), max(pnzdata.ozon), max(pnzdata.serovodorod), max(pnzdata.fenol), max(pnzdata.fv), max(pnzdata.hlor), max(pnzdata.hv), max(pnzdata.ammiak), max(pnzdata.skIs), max(pnzdata.formaldigid), max(pnzdata.nsm), max(pnzdata.hromSh), max(pnzdata.sumU) FROM PnzData pnzdata WHERE pnzID = :pnzId AND MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year");
@@ -244,16 +226,10 @@ public class PnzDataDao {
      * @param month
      * @return
      */
-    public List avgPnzDatas(int pnzId, int month ){
+    public List avgPnzDatas(int pnzId, int month, int year){
       List pnzData = new ArrayList();
       Session session = sessionFactory.openSession();
       Transaction tx = null;
-      Date date = new Date();
-      int year = Year.now().getValue();
-      int monthCurrent = date.getMonth()+1;
-      if(month > monthCurrent){
-          year = year-1;
-      }
       try {
          tx = session.beginTransaction();
          Query query = session.createQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do_), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM PnzData pnzdata WHERE pnzID = :pnzId AND MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year");

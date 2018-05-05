@@ -42,6 +42,8 @@ public class PnzDataController extends HttpServlet {
             int pnzId = Integer.parseInt(request.getParameter("pnzId"));
             int month = Integer.parseInt(request.getParameter("month"));
             int cityId = Integer.parseInt(request.getParameter("cityId"));
+            String cityName = request.getParameter("cityName");
+            int year = Integer.parseInt(request.getParameter("year"));
             Pnz pnz = new Pnz(pnzId,pnzName);
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"); 
             Date pnzDateTime = (Date)formatter.parse(request.getParameter("pnzDateTime"));
@@ -67,7 +69,7 @@ public class PnzDataController extends HttpServlet {
             try {
                 PnzDataDao pnzDataDao = new PnzDataDao();
                 pnzDataDao.addPnzData(pnz, pnzDateTime, bsh, ds, sr, ou, do_, oa, ozon, serovodorod, fenol, fv, hlor, hv, ammiak, skIs, formaldigid, nsm, hromSh, sumU);
-                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId);
+                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId+"&year="+year+"&cityName="+URLEncoder.encode(cityName, "UTF-8"));
             } catch (Exception e) {
                 
                 e.printStackTrace();
@@ -77,11 +79,13 @@ public class PnzDataController extends HttpServlet {
                 int pnzId = Integer.parseInt(request.getParameter("pnzId"));
                 int month = Integer.parseInt(request.getParameter("month"));
                 int cityId = Integer.parseInt(request.getParameter("cityId"));
+                String cityName = request.getParameter("cityName");
+                int year = Integer.parseInt(request.getParameter("year"));
                 String pnzDataId = request.getParameter("id");
                 try {
                 PnzDataDao pnzDataDao = new PnzDataDao();
                 pnzDataDao.deletePnzData(Integer.parseInt(pnzDataId));
-                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId);
+                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId+"&year="+year+"&cityName="+URLEncoder.encode(cityName, "UTF-8"));
             } catch (Exception e) {
                 
                 e.printStackTrace();
@@ -91,6 +95,8 @@ public class PnzDataController extends HttpServlet {
                 int pnzId = Integer.parseInt(request.getParameter("pnzId"));
                 int month = Integer.parseInt(request.getParameter("month"));
                 int cityId = Integer.parseInt(request.getParameter("cityId"));
+                String cityName = request.getParameter("cityName");
+                int year = Integer.parseInt(request.getParameter("year"));
                 String pnzDataId = request.getParameter("id");
                 Pnz pnz = new Pnz(pnzId,pnzName);
                 SimpleDateFormat formatter=new SimpleDateFormat("MM/dd/yyyy HH:mm");  
@@ -117,7 +123,7 @@ public class PnzDataController extends HttpServlet {
             try {
                 PnzDataDao pnzDataDao = new PnzDataDao();
                 pnzDataDao.updatePnzData(Integer.parseInt(pnzDataId), pnz, pnzDateTime, bsh, ds, sr, ou, do_, oa, ozon, serovodorod, fenol, fv, hlor, hv, ammiak, skIs, formaldigid, nsm, hromSh, sumU);
-                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId);
+                response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId+"&year="+year+"&cityName="+URLEncoder.encode(cityName, "UTF-8"));
             } catch (Exception e) {
                 
                 e.printStackTrace();

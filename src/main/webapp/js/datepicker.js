@@ -28,7 +28,8 @@ $(function() {
                 var pnzName = url.searchParams.get("pnzName");
                 var pnzId = url.searchParams.get("pnzId");
                 var cityId= url.searchParams.get("cityId");
-                location.href = "pprognoz.jsp?date="+$selected+"&pnzName="+pnzName+"&pnzId="+pnzId+"&cityId="+cityId;
+                var cityName= url.searchParams.get("cityName");
+                location.href = "pprognoz.jsp?date="+$selected+"&pnzName="+pnzName+"&pnzId="+pnzId+"&cityId="+cityId+"&cityName="+cityName;
 	});
 });
 

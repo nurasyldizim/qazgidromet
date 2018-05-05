@@ -5,7 +5,15 @@
  */
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawCharts);
-function drawCharts() {
+function drawCharts(pnzListJS) {
+    var i, stringA;
+    alert(pnzListJS[0]);
+    for (i = 0; i < pnzListJS.length; i++) { 
+        stringA += pnzListJS[i];
+    }
+    alert("asdfasf");
+    alert(stringA);
+    alert("sdfds");
     var barDataTemp = [
     ['Day', 'ПНЗ1', 'ПНЗ2', 'ПНЗ3','ПНЗ4', 'ПНЗ5'],
     ['1:00',  0,  0, 0, 0, 0],

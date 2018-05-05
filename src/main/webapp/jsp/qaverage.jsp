@@ -29,9 +29,11 @@
     </head>
     <header><%
                     request.setCharacterEncoding("UTF-8");
+                    int year = Year.now().getValue();
                     String pnzName = request.getParameter("pnzName");
                     String pnzId = request.getParameter("pnzId");
                     int cityId = Integer.parseInt(request.getParameter("cityId"));
+                    String cityName = request.getParameter("cityName");
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.now();
                 %>
@@ -42,16 +44,20 @@
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
                                     <li><a href="../">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>" >Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>" class="active">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>">Фактический P</a></li>
+					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
+					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
+					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Прогноз q ср.м</a></li>
+                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
+                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
-    <body>
+                            <center>
+                                <div class="neato-header">
+                                    <h1><%=cityName%></h1>
+                                </div>
+                            </center>
          <%
             String month = request.getParameter("month");
             request.setAttribute("monthId", month);
@@ -71,14 +77,14 @@
     request.setAttribute("MyMap", map);
 %>
     <center>
-<select class="class-select" id="monthListId" onchange="refreshFunctionMonth('<%=pnzId %>', '<%=pnzName %>', '<%=cityId%>')">
+<select class="class-select" id="monthListId" onchange="refreshFunctionMonth('<%=pnzId %>', '<%=pnzName %>', '<%=cityId%>', '<%=cityName%>')">
          <c:forEach items="${MyMap}" var="mapItem">
              <option value="${mapItem.key}" ${mapItem.key eq monthId ? "selected": ""}>${mapItem.value}</option>
          </c:forEach>
 </select>   
     </center>
 <div class="table100 ver4 m-b-110">
-    <table id="table" data border="1">
+    <table id="table" border="1">
             <tr class="row100 head"><th></th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
 <%  
             int monthInt = Integer.parseInt(month);
@@ -178,13 +184,13 @@
                 
             </table>
 </div>
-    </body>
-    <footer>
+
+	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>IITU 2018 <a href="#">Qazgidromet</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
 					</div>
 				</div>
 			</div>

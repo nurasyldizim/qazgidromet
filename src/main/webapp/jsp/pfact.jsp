@@ -4,6 +4,7 @@
     Author     : Dizim Nurasyl
 --%>
 
+<%@page import="java.time.Year"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.net.URLEncoder"%>
@@ -39,9 +40,11 @@
     </head>
     <header><%
                     request.setCharacterEncoding("UTF-8");
+                    int year  = Year.now().getValue();
                     String pnzName = request.getParameter("pnzName");
                     String pnzId = request.getParameter("pnzId");
                     int cityId = Integer.parseInt(request.getParameter("cityId"));
+                    String cityName = request.getParameter("cityName");
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.now();
                 %>
@@ -52,16 +55,20 @@
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
                                     <li><a href="../">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>">Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>" class="active">Фактический P</a></li>
+					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
+					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
+					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
+                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
+                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Фактический P</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
-    <body>
+                            <center>
+                                <div class="neato-header">
+                                    <h1><%=cityName%></h1>
+                                </div>
+                            </center>
         <%
             String date = request.getParameter("date");
         %>
@@ -93,14 +100,20 @@
   <br />
   <div class="table100 ver4 m-b-110">
                 <table id="table" width="220" border="1">
-                    <tr><td colspan="20">Расчетная матрица для "P" </td></tr>
+                    <tr><td colspan="20">Расчетная матрица для "P" г.<%=cityName%> </td></tr>
         <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
+        <script>var pnzListJS = [];</script>
         <%
             int rowCount = 0;
             PnzDataDao pnzDataDao = new PnzDataDao();               
             PnzDao pnzDao = new PnzDao();
             List<Pnz> list = pnzDao.listPnzs(cityId);
             for (Pnz p : list) {   
+                %>
+           <script>
+                pnzListJS.push('<%=p.getPnzName()%>');
+            </script>
+        <%
                 ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listPnzDatasToFP(p.getPnzId(),date); 
             for (int i = 0; i<4; i++) {
                     Iterator iterDataList = pnzDatalist[i].iterator();
@@ -108,6 +121,7 @@
                     Object[] objData = (Object[]) iterDataList.next();
                     rowCount++;
     %>
+
         <tr>
             <td><%=p.getPnzName()%></td>
                 <%if(i==0){%>
@@ -207,62 +221,43 @@
                 <td id="19id"><script>calculateQAvgToP(19);</script></td> 
             </tr>
             <%
-               int counter = 0;
+
                double[] array = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-               ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listQAvgToPP(date); 
+          boolean []check = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+               ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listQAvgToPP(date, cityId); 
             for (int i = 0; i<4; i++) {
                     Iterator iterQAvgList = pnzDatalist[i].iterator();
                     Object[] temp = (Object[]) iterQAvgList.next();
-                    if(temp[0]!=null){
-                        counter++;
                         for(int j =0; j<18; j++){
-                        array[j] = array[j] + (Double)temp[j];
-                    }
+                            if(temp[j]!=null){
+                                array[j] = array[j] + (Double)temp[j];
+                            }else{
+                                check[j]=false;
+                            }
                     }
             }
             %>
             <tr>
                 <td></td>
                 <td>q ср.сезон  ПНЗ</td>
-                <%if(counter==4){%>
-                <td><%=array[0]/4%></td>
-                <td><%=array[1]/4%></td>
-                <td><%=array[2]/4%></td>
-                <td><%=array[3]/4%></td>
-                <td><%=array[4]/4%></td>
-                <td><%=array[5]/4%></td>
-                <td><%=array[6]/4%></td>
-                <td><%=array[7]/4%></td>
-                <td><%=array[8]/4%></td>
-                <td><%=array[9]/4%></td>
-                <td><%=array[10]/4%></td>
-                <td><%=array[11]/4%></td>
-                <td><%=array[12]/4%></td>
-                <td><%=array[13]/4%></td>
-                <td><%=array[14]/4%></td>
-                <td><%=array[15]/4%></td>
-                <td><%=array[16]/4%></td>
-                <td><%=array[17]/4%></td>
-                <%}else{%>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <%}%>  
+                <td><%=((check[0]==false)? null : array[0]/4)%></td>
+                <td><%=((check[1]==false)? null : array[1]/4)%></td>
+                <td><%=((check[2]==false)? null : array[2]/4)%></td>
+                <td><%=((check[3]==false)? null : array[3]/4)%></td>
+                <td><%=((check[4]==false)? null : array[4]/4)%></td>
+                <td><%=((check[5]==false)? null : array[5]/4)%></td>
+                <td><%=((check[6]==false)? null : array[6]/4)%></td>
+                <td><%=((check[7]==false)? null : array[7]/4)%></td>
+                <td><%=((check[8]==false)? null : array[8]/4)%></td>
+                <td><%=((check[9]==false)? null : array[9]/4)%></td>
+                <td><%=((check[10]==false)? null : array[10]/4)%></td>
+                <td><%=((check[11]==false)? null : array[11]/4)%></td>
+                <td><%=((check[12]==false)? null : array[12]/4)%></td>
+                <td><%=((check[13]==false)? null : array[13]/4)%></td>
+                <td><%=((check[14]==false)? null : array[14]/4)%></td>
+                <td><%=((check[15]==false)? null : array[15]/4)%></td>
+                <td><%=((check[16]==false)? null : array[16]/4)%></td>
+                <td><%=((check[17]==false)? null : array[17]/4)%></td> 
             </tr>
             <tr>
                 <td></td>
@@ -428,7 +423,7 @@
             <script type="text/javascript" src="../js/indicator.js"></script>
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
             <script type="text/javascript" src="../js/chart.js"></script>
-    <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts()">
+            <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts.apply(this, pnzListJS)">
                 <option value="2">Взвешенные частицы (пыль)</option>
                 <option value="3">Диоксид серы</option>
                 <option value="4">Сульфаты растворимые</option>
@@ -454,13 +449,12 @@
                 <div id="bar-chart"></div>
                 <div id="png"></div>
             </div>
-    </body>
-    <footer>
+   	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>IITU 2018 <a href="#">Qazgidromet</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
 					</div>
 				</div>
 			</div>

@@ -228,22 +228,25 @@ function calculateAvgAll(cell){
  }
  
   
-function refreshFunction(cityId) {
+function refreshFunction(cityId, year, cityName) {
     var pnzList = document.getElementById("pnzListId");
     var pnzId = pnzList.options[pnzList.selectedIndex].value;
     var pnzName = encodeURIComponent(pnzList.options[pnzList.selectedIndex].text);
-    location.href = "pnzdata.jsp?pnzId=" + pnzId +"&pnzName=" + pnzName + "&month=1" +"&cityId="+cityId;
+    location.href = "pnzdata.jsp?pnzId=" + pnzId +"&pnzName=" + pnzName + "&month=1" +"&cityId="+cityId + "&year="+year + "&cityName="+cityName;
     }
 
-function refreshFunctionMonth(pnzId, pnzName, cityId) {
+function refreshFunctionMonth(pnzId, pnzName, cityId, cityName) {
     var monthList = document.getElementById("monthListId");
     var month = monthList.options[monthList.selectedIndex].value;
-    location.href = "qaverage.jsp?month="+month+"&pnzId="+pnzId+"&pnzName="+pnzName+"&cityId="+cityId;
+    location.href = "qaverage.jsp?month="+month+"&pnzId="+pnzId+"&pnzName="+pnzName+"&cityId="+cityId+"&cityName="+cityName;
     }
 
  
 function selectMonth(hrefMonth){
     location.href = hrefMonth;
+}
+function selectYear(hrefYear){
+    location.href = hrefYear;
 }
 function getEditConfirmation(id){
     var retVal = confirm("Вы действительно хотите изменить этот запись?");
