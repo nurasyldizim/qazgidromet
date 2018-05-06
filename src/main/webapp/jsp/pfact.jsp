@@ -102,7 +102,7 @@
                 <table id="table" width="220" border="1">
                     <tr><td colspan="20">Расчетная матрица для "P" г.<%=cityName%> </td></tr>
         <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-        <script>var pnzListJS = [];</script>
+        <script>var pnzListJS = ['Day'];</script>
         <%
             int rowCount = 0;
             PnzDataDao pnzDataDao = new PnzDataDao();               
@@ -420,10 +420,7 @@
                 </tr>              
             </table>
   </div>
-            <script type="text/javascript" src="../js/indicator.js"></script>
-            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-            <script type="text/javascript" src="../js/chart.js"></script>
-            <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts.apply(this, pnzListJS)">
+            <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts(Array.apply(null,pnzListJS))">
                 <option value="2">Взвешенные частицы (пыль)</option>
                 <option value="3">Диоксид серы</option>
                 <option value="4">Сульфаты растворимые</option>
@@ -444,11 +441,14 @@
                 <option value="19">Суммарные углеводороды</option>
         </select></center>
             <div class="chart">
-                <h2>Диаграмма по ПНЗ</h2>
+                <h2>Диаграмма по ПНЗ <%=cityName%></h2>
                 <h5 id="optionName"></h5>
                 <div id="bar-chart"></div>
                 <div id="png"></div>
             </div>
+            <script type="text/javascript" src="../js/indicator.js"></script>
+            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script type="text/javascript" src="../js/chart.js"></script>
    	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">

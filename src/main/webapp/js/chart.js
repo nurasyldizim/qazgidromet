@@ -6,96 +6,57 @@
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawCharts);
 function drawCharts(pnzListJS) {
-    var i, stringA;
-    alert(pnzListJS[0]);
-    for (i = 0; i < pnzListJS.length; i++) { 
-        stringA += pnzListJS[i];
-    }
-    alert("asdfasf");
-    alert(stringA);
-    alert("sdfds");
-    var barDataTemp = [
-    ['Day', 'ПНЗ1', 'ПНЗ2', 'ПНЗ3','ПНЗ4', 'ПНЗ5'],
-    ['1:00',  0,  0, 0, 0, 0],
-    ['7:00',  0,  0, 0, 0, 0],
-    ['13:00',  0,  0, 0, 0, 0],
-    ['19:00',  0,  0, 0, 0, 0]
+    var i,j;
+ 
+    barDataTemp = [
+    ['Day'],
+    ['1:00'],
+    ['7:00'],
+    ['13:00'],
+    ['19:00']
   ];
+  for (i=0; i<pnzListJS.length; i++) {
+        barDataTemp[0][i] = pnzListJS[i];
+    }
+  for (i=1; i<pnzListJS.length; i++) {
+        barDataTemp[1][i] = 0;
+    }
+  for (i=1; i<pnzListJS.length; i++) {
+        barDataTemp[2][i] = 0;
+    }
+  for (i=1; i<pnzListJS.length; i++) {
+        barDataTemp[3][i] = 0;
+    }
+  for (i=1; i<pnzListJS.length; i++) {
+        barDataTemp[4][i] = 0;
+    }
 var selectChart = document.getElementById("chartSelect");
 var columnNumber = selectChart.options[selectChart.selectedIndex].value;
-document.getElementById("optionName").innerHTML = selectChart.options[selectChart.selectedIndex].value;;
+document.getElementById("optionName").innerHTML = selectChart.options[selectChart.selectedIndex].text;
 var table = document.getElementById("table"),rows = parseInt(table.rows.length);
             for(var r = 2; r<rows-8; r++){
-
-                switch (table.rows[r].cells[0].innerHTML+table.rows[r].cells[1].innerHTML) {
-                    case "ПНЗ11:00":
-                        barDataTemp[1][1] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ17:00":
-                        barDataTemp[2][1] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ113:00":
-                        barDataTemp[3][1] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ119:00":
-                        barDataTemp[4][1] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ21:00":
-                        barDataTemp[1][2] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ27:00":
-                        barDataTemp[2][2] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ213:00":
-                        barDataTemp[3][2] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ219:00":
-                        barDataTemp[4][2] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ31:00":
-                        barDataTemp[1][3] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ37:00":
-                        barDataTemp[2][3] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ313:00":
-                        barDataTemp[3][3] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ319:00":
-                        barDataTemp[4][3] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ41:00":
-                        barDataTemp[1][4] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ47:00":
-                        barDataTemp[2][4] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ413:00":
-                        barDataTemp[3][4] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ419:00":
-                        barDataTemp[4][4] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ51:00":
-                        barDataTemp[1][5] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ57:00":
-                        barDataTemp[2][5] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ513:00":
-                        barDataTemp[3][5] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break;
-                    case "ПНЗ519:00":
-                        barDataTemp[4][5] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
-                        break; 
-                    default :
-}
+                for(i=1;i<pnzListJS.length;i++){
+                    switch(table.rows[r].cells[0].innerHTML+table.rows[r].cells[1].innerHTML){
+                        case pnzListJS[i]+"1:00":
+                            barDataTemp[1][i] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
+                            break;
+                        case pnzListJS[i]+"7:00":
+                            barDataTemp[2][i] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
+                            break;
+                        case pnzListJS[i]+"13:00":
+                            barDataTemp[3][i] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
+                            break;
+                        case pnzListJS[i]+"19:00":
+                            barDataTemp[4][i] = parseFloat(table.rows[r].cells[columnNumber].innerHTML);
+                            break;
+                    }
+                }
         }
          var barData = google.visualization.arrayToDataTable(barDataTemp);
   var barOptions = {
     focusTarget: 'category',
     backgroundColor: 'transparent',
-    colors: ['cornflowerblue','Yellow','tomato', 'ForestGreen','DarkSlateGrey'],
+    colors: ['Red','Green','Yellow','Blue','Orange','Purple','Cyan','Magenta','Lime','Pink','Teal','Lavender','Brown','Beige','Maroon','Olive','Coral','Navy','Grey','White','Black'],
     fontName: 'Open Sans',
     chartArea: {
       left: 50,
