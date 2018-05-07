@@ -5,25 +5,17 @@
  */
 
 
-$('#login-button').click(function(){
-  $('#login-button').fadeOut("slow",function(){
-    $("#container").fadeIn();
-    TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
-    TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
-  });
-});
+$(function() {
+  $('a.scroll').on('click',function ( event ) {
+    event.preventDefault();
 
-$(".close-btn").click(function(){
-  TweenMax.from("#container", .4, { scale: 1, ease:Sine.easeInOut});
-  TweenMax.to("#container", .4, { left:"0px", scale: 0, ease:Sine.easeInOut});
-  $("#container, #forgotten-container").fadeOut(800, function(){
-    $("#login-button").fadeIn(800);
-  });
-});
-
-/* Forgotten Password */
-$('#forgotten').click(function(){
-  $("#container").fadeOut(function(){
-    $("#forgotten-container").fadeIn();
+    var $anchor  = $(this),
+        $section = $anchor.attr('data-section');
+    
+    if ( $section === '3' ) {
+      $('#wrap .wrap-inner').addClass('goto-' + '2');
+    } else {
+      $('#wrap .wrap-inner').removeClass('goto-2 goto-3');
+    }
   });
 });

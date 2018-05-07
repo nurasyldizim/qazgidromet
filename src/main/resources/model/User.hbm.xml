@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.User" table="user" catalog="nmudb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="firstName" length="30" />
+        </property>
+        <property name="secondName" type="string">
+            <column name="secondName" length="30" />
+        </property>
+        <property name="workName" type="string">
+            <column name="workName" length="30" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="60" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" not-null="true" />
+        </property>
+        <property name="admin" type="boolean">
+            <column name="admin" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

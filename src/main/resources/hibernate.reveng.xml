@@ -5,4 +5,5 @@
   <table-filter match-name="pnz_data"/>
   <table-filter match-name="pnz"/>
   <table-filter match-name="city"/>
+  <table-filter match-name="user"/>
 </hibernate-reverse-engineering>

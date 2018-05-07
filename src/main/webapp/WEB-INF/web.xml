@@ -11,20 +11,20 @@
         </jsp-property-group>
     </jsp-config>
     <servlet>
-        <servlet-name>PnzController</servlet-name>
-        <servlet-class>controller.PnzController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PnzDataController</servlet-name>
         <servlet-class>controller.PnzDataController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>PnzController</servlet-name>
-        <url-pattern>/PnzController</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>controller.AdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PnzDataController</servlet-name>
         <url-pattern>/PnzDataController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

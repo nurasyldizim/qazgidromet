@@ -22,29 +22,52 @@
 	<div class="cloud x5"></div>
       </div>
 
- <div class="container">
+    <div class="container">
+        <div id="wrap" class="wrap">
+        <div class="wrap-inner">
 
-
-      <div id="login">
-
-        <form method="post">
-
-          <fieldset class="clearfix">
-
-            <p><span class="fontawesome-user"></span><input type="text" value="E-mail" onBlur="if(this.value == '') this.value = 'E-mail'" onFocus="if(this.value == 'E-mail') this.value = ''" required></p> 
-            <p><span class="fontawesome-lock"></span><input type="password"  value="Пароль" onBlur="if(this.value == '') this.value = 'Пароль'" onFocus="if(this.value == 'Пароль') this.value = ''" required></p> 
-            <p><input type="submit" value="Войти"></p>
-
-          </fieldset>
-
-        </form>
-
-          <p>Забыли пароль?<br> <a href="#" class="blue">Отправить письмо по электронной почте</a><span class="fontawesome-arrow-right"></span></p>
-
-      </div> <!-- end login -->
+    <!--Login Section-->
+    <div class="section" id="section1">
+      <div class="form form--login">
+        <h1 class="alpha">Войти</h1>
+        <p>У вас есть доступ? Войдите в систему.</p>
+        <div>
+          <form class="form-wrap">
+            <input id="" class="inputbox email" type="text" placeholder="Email" />
+            <input id="" class="inputbox password" type="password" placeholder="Пароль" />
+            <p><a href="#" class="button">Войти <i class="icon-rocket"></i></a></p>
+          </form>
+        </div>
+        <hr />
+        <p>Забыли пароль? Отправить по <a class="scroll" href="#section3" data-section="3">Email &raquo;</a></p>
       </div>
-    <center><p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.</center>
-    <center>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> </center>
+    </div>
+    <!--END: Login Section-->
+
+    <!--Forget Password Section-->
+    <div class="section" id="section3">
+      <div class="form form--login">
+        <h1 class="alpha">Забыли пароль?</h1>
+        <p>Введите свой e-mail и мы вышлем Вам пароль</p>
+        <div>
+          <form class="form-wrap">
+            <input id="" class="inputbox email" type="text" placeholder="Email" />
+            <p><a href="#" class="button">Отправить <i class="icon-rocket"></i></a></p>
+          </form>
+        </div>
+        <hr />
+        <p>Вы сами вспомнили свой пароль?</p>
+        <p><a class="scroll" href="#section1" data-section="1">&laquo; Войти</a></p>
+      </div>
+    </div>
+    <!--END: Forget Password Section-->
+
+</div>
+</div>
+    </div>
+    <center><a href="#">Qazgidromet</a>.</center>
+    <center>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.</center>
+    <center>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a>.</center>
     
     </body>
 </html>
