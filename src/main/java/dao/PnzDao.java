@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import controller.HibernateUtil;
 import java.util.ArrayList;
 import model.Pnz;
 
@@ -34,7 +35,7 @@ public class PnzDao {
     
    public List<Pnz> listPnzs(int cityId){
       List<Pnz> pnzData = new ArrayList<Pnz>();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       
       try {

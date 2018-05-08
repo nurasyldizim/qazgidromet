@@ -17,20 +17,33 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%
+    String user = null;
+    if (session.getAttribute("adminSession")==null) {
+        response.sendRedirect("login.jsp");
+    } else if(session.getAttribute("adminSession").equals("admin")) {
+        user = (String) session.getAttribute("emailSession");
+    }else{
+        response.sendRedirect("login.jsp");
+    }
+%>
 	<head>
 	<meta charset="utf-8">
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 	<title>Qazgidromet</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/admin.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
         <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>        
 	</head>
 	<body>
 	<header>
 		<div class="container text-center">
 			<div class="fh5co-navbar-brand">
-				<a class="fh5co-logo" href="">Qazgidromet</a>
+				<a class="fh5co-logo" href="<%=request.getContextPath()%>/index.jsp">Qazgidromet</a>
+                                <div style="text-align: right"><a><%=user%></a></div>
+                                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
 			</div>
+    
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
                                         <li><a href="" class="active">Главная</a></li>
@@ -43,24 +56,25 @@ and open the template in the editor.
                 <div class="pop-up">
   <span>x</span>
   <div class="pop-up-text">
-    <h1>Добавить нового пользователя</h1>
+      <h1 id="popHeader">Добавить нового пользователя</h1>
     <p>введите данные</p>
-    <form method="post" action="../AdminController">
+    <form name="frm" method="post" action="<%=request.getContextPath()%>/AdminController">
     <fieldset class="container">
   <div class="wrapper">
-    <label for="tbUnm" class="lbl-tb"><i class="fa fa-user fa-fw"></i> Имя</label>
+      <input id="userId" type="hidden" name="id" />
+    <label for="tbName" class="lbl-tb"><i class="fa fa-user fa-fw"></i> Имя</label>
     <br />
-    <input name="firstName" id="tbUnm" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
+    <input name="firstName" id="tbName" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
   </div>
   <div class="wrapper">
-    <label for="tbEmail" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Фамилия</label>
+    <label for="tbSurname" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Фамилия</label>
     <br />
-    <input name="lastName" id="tbEmail" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
+    <input name="secondName" id="tbSurname" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
   </div>
   <div class="wrapper">
-    <label for="tbEmail" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Должность</label>
+    <label for="tbWork" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Должность</label>
     <br />
-    <input name="workName" id="tbEmail" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
+    <input name="workName" id="tbWork" type="text" class="frm-ctrl tb" spellcheck="false" autocomplete="off" />
   </div>
   <div class="wrapper">
     <label for="tbEmail" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Email</label>
@@ -78,17 +92,23 @@ and open the template in the editor.
     <input name="confirmPassword" id="tbPwd2" type="password" class="frm-ctrl tb" />
   </div>
   <div class="wrapper">
-    <label for="tbEmail" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Админ</label>
+    <label for="tbAdmin" class="lbl-tb"><i class="fa fa-envelope-o fa-fw"></i> Админ</label>
     <br />
-    <input name="isAdmin" id="tbEmail" type="checkbox" class="frm-ctrl tb" spellcheck="false"  />
+    <div id="wrapper">
+		<div class="ioslide">		
+                    <input name="isAdmin" type="checkbox" class="iostyle" id="ioslide" checked="false"/>
+			<label for="ioslide"></label>
+		</div>
+	</div>
   </div>
   <div class="wrapper">
-      <input type="submit" name="ACTION" value="Добавить" class="frm-ctrl btn" />
+      <input type="submit" id="tbSumbit" name="ACTION" value="Добавить" class="pop-up-button2" />
   </div>
 </fieldset>
     </form>
   </div>
 </div>
+                              
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -109,14 +129,14 @@ and open the template in the editor.
             List<User> list = userDao.listUsers();
             for ( User u : list) {
          %>
-        <tr id="<%=u.getId()%>">
-            <td><%=u.getFirstName()%></td>
-            <td><%=u.getSecondName()%></td>
-            <td><%=u.getEmail()%></td>
-            <td><%=encDec.decrypt(u.getPassword())%></td>
-            <td><a><%if(u.isAdmin()==true){%><i class="glyphicon glyphicon-ok"></i><%}else{%><i class="glyphicon glyphicon-remove"><%}%></a></td>
-            <td><%=u.getWorkName()%></td>
-            <td><a><i class="glyphicon glyphicon-pencil"></i></a> <a><i class="glyphicon glyphicon-trash"></i></a></td>
+        <tr>
+            <td id="name<%=u.getId()%>"><%=u.getFirstName()%></td>
+            <td id="surname<%=u.getId()%>"><%=u.getSecondName()%></td>
+            <td id="email<%=u.getId()%>"><%=u.getEmail()%></td>
+            <td id="password<%=u.getId()%>"><%=encDec.decrypt(u.getPassword())%></td>
+            <td id="admin<%=u.getId()%>"><%if(u.isAdmin()==true){%><a><i class="glyphicon glyphicon-ok">Да</i></a><%}else{%><a><i class="glyphicon glyphicon-remove">Нет</i><%}%></a></td>
+            <td id="work<%=u.getId()%>"><%=u.getWorkName()%></td>
+            <td><a class="pop-up-link"><i id="<%=u.getId()%>"class="glyphicon glyphicon-pencil"></i></a> <a class="pop-up-delete"><i id="<%=u.getId()%>" class="glyphicon glyphicon-trash"></i></a></td>
         </tr>
       <%}%>
     </tbody>
@@ -125,7 +145,7 @@ and open the template in the editor.
 
 <div class="pop-up-container">
 </div>
-<script type="text/javascript" src="../js/admin.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/admin.js"></script>
 	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">

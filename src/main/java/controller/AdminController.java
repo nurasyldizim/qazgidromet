@@ -49,11 +49,43 @@ public class AdminController extends HttpServlet {
             String workName = request.getParameter("workName");
             String email = request.getParameter("email");
             String password = encDec.encrypt(request.getParameter("password"));
-            String confirmPassword = request.getParameter("confirmPassword");
-            boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
+            String confirmPassword = encDec.encrypt(request.getParameter("confirmPassword"));
+            boolean isAdmin = false;
+            if(request.getParameter("isAdmin").equals("on")){
+                isAdmin = true;
+            }
+            if(password.equals(confirmPassword)){
+                UserDao u = new UserDao();
+                u.addUser(firstName, secondName, workName, email, password, isAdmin);
+                response.sendRedirect("jsp/admin.jsp");
+            }else{
+                response.sendRedirect("jsp/admin.jsp");
+            }
+        }else if(action.equals("Удалить")){
+            int id = Integer.parseInt(request.getParameter("id"));
             UserDao u = new UserDao();
-            System.out.println(firstName+" "+secondName+" "+workName+" "+ email+" "+password+" "+isAdmin);
-            u.addUser(firstName, secondName, workName, email, password, isAdmin);
+            u.deleteUser(id);
+            response.sendRedirect("jsp/admin.jsp");
+        }else if(action.equals("Изменить")){
+            String firstName = request.getParameter("firstName");
+            String secondName = request.getParameter("secondName");
+            String workName = request.getParameter("workName");
+            String email = request.getParameter("email");
+            String password = encDec.encrypt(request.getParameter("password"));
+            String confirmPassword = encDec.encrypt(request.getParameter("confirmPassword"));
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            boolean isAdmin = false;
+            System.out.println(request.getParameter("isAdmin"));
+            if(request.getParameter("isAdmin").equals("on")){
+                isAdmin = true;
+            }
+            if(password.equals(confirmPassword)){
+                UserDao u = new UserDao();    
+                u.updateUser(id, firstName, secondName, workName, email, password, isAdmin);
+                response.sendRedirect("jsp/admin.jsp");
+            }else{
+                response.sendRedirect("jsp/admin.jsp");
+            }
         }
         }catch(Exception e){
             System.out.println(e);

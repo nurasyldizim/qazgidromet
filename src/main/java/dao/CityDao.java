@@ -5,6 +5,7 @@
  */
 package dao;
 
+import controller.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import model.City;
@@ -31,7 +32,7 @@ public class CityDao {
     
    public List<City> listCitis( ){
       List<City> cityData = new ArrayList<City>();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       
       try {

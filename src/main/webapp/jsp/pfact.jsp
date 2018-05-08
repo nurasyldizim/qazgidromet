@@ -3,7 +3,16 @@
     Created on : 12.03.2018, 22:13:30
     Author     : Dizim Nurasyl
 --%>
-
+<%
+    String user = null;
+    if (session.getAttribute("adminSession")==null) {
+        response.sendRedirect("login.jsp");
+    } else if(session.getAttribute("adminSession").equals("admin") || session.getAttribute("adminSession").equals("user")) {
+        user = (String) session.getAttribute("emailSession");
+    }else{
+        response.sendRedirect("login.jsp");
+    }
+%>
 <%@page import="java.time.Year"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -22,20 +31,20 @@
 <html>
     <head>
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
   </script>
 
-        <link rel="stylesheet" type="text/css" href="../css/datepicker.css">
-        <link rel="stylesheet" type="text/css" href="../css/indicator.css">
-        <link rel="stylesheet" type="text/css" href="../css/chart.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datepicker.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/indicator.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/chart.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script type="text/javascript" src="../js/mainjs.js"></script>
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <script type="text/javascript" src="../js/jquery-ui.js"></script>
-        <script type="text/javascript" src="../js/datepicker2.js"></script>
-        <script type="text/javascript" src="../js/toexcel.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/mainjs.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/datepicker2.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/toexcel.js"></script>
 
     </head>
     <header><%
@@ -50,11 +59,13 @@
                 %>
 		<div class="container text-center">
 			<div class="fh5co-navbar-brand">
-                            <a class="fh5co-logo" href="../">Qazgidromet</a>
+                            <a class="fh5co-logo" href="<%=request.getContextPath()%>/">Qazgidromet</a>
+                            <div style="text-align: right"><a><%=user%></a></div>
+                                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
 			</div>
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
-                                    <li><a href="../">Главная</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/">Главная</a></li>
 					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
 					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
 					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
@@ -64,7 +75,7 @@
 			</nav>
 		</div>
 	</header>
-                            <center>
+                         <center>
                                 <div class="neato-header">
                                     <h1><%=cityName%></h1>
                                 </div>
@@ -446,9 +457,9 @@
                 <div id="bar-chart"></div>
                 <div id="png"></div>
             </div>
-            <script type="text/javascript" src="../js/indicator.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/js/indicator.js"></script>
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-            <script type="text/javascript" src="../js/chart.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/js/chart.js"></script>
    	<footer>
 		<div id="footer" class="fh5co-border-line">
 			<div class="container">

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import controller.HibernateUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,7 +62,7 @@ public class PnzDataDao {
      */
     
    public void addPnzData(Pnz pnz, Date pnzDateTime, Double bsh, Double ds, Double sr, Double ou, Double do_, Double oa, Double ozon, Double serovodorod, Double fenol, Double fv, Double hlor, Double hv, Double ammiak, Double skIs, Double formaldigid, Double nsm, Double hromSh, Double sumU){
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       
       try {
@@ -102,7 +103,7 @@ public class PnzDataDao {
      * @param sumU
      */
     public void updatePnzData(int pnzDataId, Pnz pnz, Date pnzDateTime, Double bsh, Double ds, Double sr, Double ou, Double do_, Double oa, Double ozon, Double serovodorod, Double fenol, Double fv, Double hlor, Double hv, Double ammiak, Double skIs, Double formaldigid, Double nsm, Double hromSh, Double sumU){
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       
       try {
@@ -126,7 +127,7 @@ public class PnzDataDao {
      */
     public List<PnzData> listPnzDatas(int pnzId, int month, int year ){
       List<PnzData> pnzData = new ArrayList<PnzData>();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -150,7 +151,7 @@ public class PnzDataDao {
      * @param PnzDataID
      */
     public void deletePnzData(Integer PnzDataID){
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       
       try {
@@ -174,7 +175,7 @@ public class PnzDataDao {
      */
     public List minPnzDatas(int pnzId, int month,int year ){
       List pnzData = new ArrayList();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -201,7 +202,7 @@ public class PnzDataDao {
      */
     public List maxPnzDatas(int pnzId, int month, int year ){
       List pnzData = new ArrayList();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -228,7 +229,7 @@ public class PnzDataDao {
      */
     public List avgPnzDatas(int pnzId, int month, int year){
       List pnzData = new ArrayList();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -256,7 +257,7 @@ public class PnzDataDao {
      */
     public List<PnzData> listPnzDatasByMonth(int pnzId, int month, int year ){
       List<PnzData> pnzData = new ArrayList<PnzData>();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -283,7 +284,7 @@ public class PnzDataDao {
      */
     public List<PnzData> listAllPnzDatasByMonth(int month, int year, int cityId ){
       List<PnzData> pnzData = new ArrayList<PnzData>();
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
@@ -306,7 +307,7 @@ public class PnzDataDao {
      */
     public ArrayList<PnzData>[] qAvgPnzDatas( int month, int cityId ){
       ArrayList<PnzData>[] avgData = (ArrayList<PnzData>[])new ArrayList[4];
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       Date date = new Date();
       int currentYear = Year.now().getValue();
@@ -370,7 +371,7 @@ public class PnzDataDao {
     
     public ArrayList<PnzData>[] listQAvgToPP(String dateStr, int cityId ) throws ParseException{
       ArrayList<PnzData>[] avgData = (ArrayList<PnzData>[])new ArrayList[4];
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
       Date date = formatter.parse(dateStr);
@@ -438,7 +439,7 @@ public class PnzDataDao {
     
     public ArrayList<PnzData>[] listPnzDatasToPP(int pnzId, String dateStr ) throws ParseException{
       ArrayList<PnzData>[] pnzData = (ArrayList<PnzData>[])new ArrayList[4];
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
       Date date;
@@ -496,7 +497,7 @@ public class PnzDataDao {
     
     public ArrayList<PnzData>[] listPnzDatasToFP(int pnzId, String dateStr ) throws ParseException{
       ArrayList<PnzData>[] pnzData = (ArrayList<PnzData>[])new ArrayList[4];
-      Session session = sessionFactory.openSession();
+      Session session = HibernateUtil.getSessionFactory().openSession();
       Transaction tx = null;
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
       Date date;

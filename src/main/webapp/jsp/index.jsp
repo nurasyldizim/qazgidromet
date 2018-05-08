@@ -14,11 +14,22 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<%
+    String user = null;
+    if (session.getAttribute("adminSession")==null) {
+        response.sendRedirect("login.jsp");
+    } else if(session.getAttribute("adminSession").equals("admin") || session.getAttribute("adminSession").equals("user")) {
+        user = (String) session.getAttribute("emailSession");
+    }else{
+        response.sendRedirect("login.jsp");
+    }
+%>
 	<head>
 	<meta charset="utf-8">
 	<title>Qazgidromet</title>
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
         
 	</head>
 	<body>
@@ -26,6 +37,8 @@ and open the template in the editor.
 		<div class="container text-center">
 			<div class="fh5co-navbar-brand">
 				<a class="fh5co-logo" href="">Qazgidromet</a>
+                                <div style="text-align: right"><a><%=user%></a></div>
+                                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
 			</div>
 			<nav id="fh5co-main-nav" role="navigation">
 				<ul>
@@ -34,6 +47,7 @@ and open the template in the editor.
 			</nav>
 		</div>
 	</header>
+             
 	<div class="heading-section text-center">
             <h2>Неблагоприятные метеорологические условия</h2>
         </div>
@@ -79,7 +93,7 @@ and open the template in the editor.
                 List<Pnz> list1 = pnzDao.listPnzs(c.getCityId());
                 if(list1.size()!=0){
          %>
-         <li><a href="jsp/pnzdata.jsp?cityId=<%=c.getCityId() %>&cityName=<%=c.getCityName()%>&pnzId=<%=list1.get(0).getPnzId() %>&pnzName=<%=list1.get(0).getPnzName() %>&month=1&year=<%=year%>"><%=c.getCityName() %></a></li>
+         <li><a href="<%=request.getContextPath()%>/jsp/pnzdata.jsp?cityId=<%=c.getCityId() %>&cityName=<%=c.getCityName()%>&pnzId=<%=list1.get(0).getPnzId() %>&pnzName=<%=list1.get(0).getPnzName() %>&month=1&year=<%=year%>"><%=c.getCityName() %></a></li>
           <%  }     
           }%>
           </ul>

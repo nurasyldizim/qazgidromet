@@ -16,6 +16,23 @@
   background:#65c3ee;
 	color:#121212;
 }
+.pop-up-button2 {
+  background:none;
+  width:180px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  color:#65c3ee;
+  margin:auto;
+  border-radius:5px;
+  border:1px solid #65c3ee;
+  cursor:pointer;
+	font-weight:bold;
+}
+.pop-up-button2:hover{
+  background:#65c3ee;
+	color:#121212;
+}
 .pop-up {
   height:auto;
   width:60%;
@@ -128,4 +145,91 @@ span {
 .btn:hover {
   background:white;
   color:black;
+}
+div#wrapper{
+	display:block;
+	width:120px;
+	height:30px;
+	margin:5px 50%,0, 50%;
+}
+div.ioslide{
+	position:relative;
+        margin-left: 0%;
+}
+input.iostyle[type=checkbox]{
+	-webkit-appearance: none;
+	display:block;
+	position: relative;
+	width:100px;
+	height:30px;
+	background:#65c0ec;
+	border-radius: 30px;
+	box-shadow:	0px -3px 1px 2px rgba(0,0,0,0.1),
+				0px 3px 1px 2px rgba(255,255,255,0.9),
+				inset 1px 3px 4px rgba(0,0,0,0.35),
+				inset 1px -1px 2px rgba(0,0,0,0.2);
+	cursor:pointer;
+	-webkit-transition: all 0.2s;
+}
+div.ioslide label{
+	display:block;
+	position: absolute;
+	top:0;
+	margin-top: -7px;
+	margin-left: 70px;
+	background:#000;
+	height:40px;
+	width:40px;
+	border-radius: 100%;
+	background:-webkit-linear-gradient(#fbfbfb 0%, #e4e4e4 100%);
+	border:1px solid rgba(0,0,0,0.1);
+	box-shadow:	inset 0px 1px 1px rgba(255,255,255,1),
+				inset 0px -1px 20px 0px rgba(0,0,0,0.1),
+				0px 3px 7px rgba(0,0,0,0.4);
+	z-index:100;
+	cursor:pointer;
+	-webkit-transition: margin-left 0.5s;
+}
+div.ioslide label:before{
+	display: block;
+	content: "";
+	position: absolute;
+	left:14px;
+	top:15px;
+	height:10px;
+	width:10px;
+	border-radius: 100%;
+	background: #65c0ec;
+	border:1px solid rgba(255,255,255,0.7);
+	box-shadow: inset 0px 1px 2px rgba(0,0,0,0.4),
+				0px 1px 1px rgba(255,255,255,1);
+	z-index:80;
+}
+input.iostyle[type=checkbox]:checked + label{
+	margin-left:-7px;
+}
+input.iostyle[type=checkbox]:checked + label:before{
+	background:#f2d394;
+}
+input.iostyle[type=checkbox]:before{
+	display: block;
+	content: "Нет";
+	font-family: Oswald;
+	font-size: 13pt;
+	color:#ffe;
+	position: absolute;
+	left:30px;
+	top:3px;
+	height:10px;
+	width:10px;
+	border-radius: 100%;
+	z-index:80;
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.3);
+}
+input.iostyle[type=checkbox]:checked{
+	background:#f2d394;
+}
+input.iostyle[type=checkbox]:checked:before{
+	content:"Да";
+	left:45px;
 }

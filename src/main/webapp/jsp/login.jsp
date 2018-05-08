@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css">
         <title>JSP Page</title>
     </head>
     <body>
@@ -32,10 +32,11 @@
         <h1 class="alpha">Войти</h1>
         <p>У вас есть доступ? Войдите в систему.</p>
         <div>
-          <form class="form-wrap">
-            <input id="" class="inputbox email" type="text" placeholder="Email" />
-            <input id="" class="inputbox password" type="password" placeholder="Пароль" />
-            <p><a href="#" class="button">Войти <i class="icon-rocket"></i></a></p>
+           <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+           <form id="login_form" class="form-wrap" method="post" action="<%=request.getContextPath()%>/LoginController">
+               <input name="email" id="" class="inputbox email" type="text" placeholder="Email" />
+               <input name="password" id="" class="inputbox password" type="password" placeholder="Пароль" />
+               <p><a href="javascript:{}" onclick="document.getElementById('login_form').submit(); return false;" class="button">Войти <i class="icon-rocket"></i></a></p>
           </form>
         </div>
         <hr />

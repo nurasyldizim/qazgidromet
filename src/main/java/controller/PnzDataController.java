@@ -70,6 +70,7 @@ public class PnzDataController extends HttpServlet {
                 PnzDataDao pnzDataDao = new PnzDataDao();
                 pnzDataDao.addPnzData(pnz, pnzDateTime, bsh, ds, sr, ou, do_, oa, ozon, serovodorod, fenol, fv, hlor, hv, ammiak, skIs, formaldigid, nsm, hromSh, sumU);
                 response.sendRedirect("jsp/pnzdata.jsp?pnzId="+pnzId+"&pnzName="+URLEncoder.encode(pnzName, "UTF-8")+"&month="+month+"&cityId="+cityId+"&year="+year+"&cityName="+URLEncoder.encode(cityName, "UTF-8"));
+                response.sendRedirect(action);
             } catch (Exception e) {
                 
                 e.printStackTrace();
