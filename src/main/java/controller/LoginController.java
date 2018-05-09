@@ -7,14 +7,12 @@ package controller;
 
 import dao.UserDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.security.DeclareRoles;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -58,7 +56,7 @@ public class LoginController extends HttpServlet {
         } catch (IllegalBlockSizeException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
@@ -76,9 +74,10 @@ public class LoginController extends HttpServlet {
             session.setAttribute("adminSession", "user");
             response.sendRedirect("jsp/index.jsp");
         } else {
-            request.setAttribute("errMessage", userValidate);
-            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("errMessage", userValidate);
+            response.sendRedirect("jsp/login.jsp");
         }
 
-    } 
+    }
 }

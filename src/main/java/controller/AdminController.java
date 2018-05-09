@@ -7,10 +7,8 @@ package controller;
 
 import dao.UserDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
@@ -18,8 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
-
+import javax.servlet.http.HttpSession;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -42,56 +40,85 @@ public class AdminController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         EncDecPassword encDec = new EncDecPassword();
         String action = request.getParameter("ACTION");
-        try{
-        if(action.equals("Добавить")){
-            String firstName = request.getParameter("firstName");
-            String secondName = request.getParameter("secondName");
-            String workName = request.getParameter("workName");
-            String email = request.getParameter("email");
-            String password = encDec.encrypt(request.getParameter("password"));
-            String confirmPassword = encDec.encrypt(request.getParameter("confirmPassword"));
-            boolean isAdmin = false;
-            if(request.getParameter("isAdmin").equals("on")){
-                isAdmin = true;
-            }
-            if(password.equals(confirmPassword)){
+        try {
+            if (action.equals("Добавить")) {
+                String firstName = request.getParameter("firstName");
+                String secondName = request.getParameter("secondName");
+                String workName = request.getParameter("workName");
+                String email = request.getParameter("email");
+                String password = encDec.encrypt(request.getParameter("password"));
+                boolean isAdmin = false;
+                if (request.getParameter("isAdmin") == null) {
+                    isAdmin = false;
+                } else if (request.getParameter("isAdmin").equals("on")) {
+                    isAdmin = true;
+                }
+                String isAdded = null;
+                try {
+                    UserDao u = new UserDao();
+                    isAdded = u.addUser(firstName, secondName, workName, email, password, isAdmin);
+                    if (isAdded == null) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("errMessage", "Пользователь не довавлен. Праверьте данные");
+                        response.sendRedirect("jsp/admin.jsp");
+                    } else {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("errMessage", "Пользователь добавлен.");
+                        response.sendRedirect("jsp/admin.jsp");
+                    }
+                } catch (HibernateException e) {
+                    System.err.println(e);
+                    response.sendRedirect("jsp/admin.jsp");
+                }
+            } else if (action.equals("Удалить")) {
+                int id = Integer.parseInt(request.getParameter("id"));
                 UserDao u = new UserDao();
-                u.addUser(firstName, secondName, workName, email, password, isAdmin);
-                response.sendRedirect("jsp/admin.jsp");
-            }else{
-                response.sendRedirect("jsp/admin.jsp");
+                String isDeleted = u.deleteUser(id);
+                if (isDeleted == null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("errMessage", "Пользователь не удален. Попробуйте еще раз");
+                    response.sendRedirect("jsp/admin.jsp");
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("errMessage", "Пользователь удален.");
+                    response.sendRedirect("jsp/admin.jsp");
+                }
+
+            } else if (action.equals("Изменить")) {
+                String firstName = request.getParameter("firstName");
+                String secondName = request.getParameter("secondName");
+                String workName = request.getParameter("workName");
+                String email = request.getParameter("email");
+                String password = encDec.encrypt(request.getParameter("password"));
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                boolean isAdmin = false;
+                if (request.getParameter("isAdmin") == null) {
+                    isAdmin = false;
+                } else if (request.getParameter("isAdmin").equals("on")) {
+                    isAdmin = true;
+                }
+                String isUpdated = null;
+                try {
+                    UserDao u = new UserDao();
+                    isUpdated = u.updateUser(id, firstName, secondName, workName, email, password, isAdmin);
+                    if (isUpdated == null) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("errMessage", "Пользователь не изменен. Проверьте данные");
+                        response.sendRedirect("jsp/admin.jsp");
+                    } else {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("errMessage", "Пользователь изменен.");
+                        response.sendRedirect("jsp/admin.jsp");
+                    }
+                } catch (HibernateException e) {
+                    System.err.println(e);
+                    response.sendRedirect("jsp/admin.jsp");
+                }
             }
-        }else if(action.equals("Удалить")){
-            int id = Integer.parseInt(request.getParameter("id"));
-            UserDao u = new UserDao();
-            u.deleteUser(id);
-            response.sendRedirect("jsp/admin.jsp");
-        }else if(action.equals("Изменить")){
-            String firstName = request.getParameter("firstName");
-            String secondName = request.getParameter("secondName");
-            String workName = request.getParameter("workName");
-            String email = request.getParameter("email");
-            String password = encDec.encrypt(request.getParameter("password"));
-            String confirmPassword = encDec.encrypt(request.getParameter("confirmPassword"));
-            Integer id = Integer.parseInt(request.getParameter("id"));
-            boolean isAdmin = false;
-            System.out.println(request.getParameter("isAdmin"));
-            if(request.getParameter("isAdmin").equals("on")){
-                isAdmin = true;
-            }
-            if(password.equals(confirmPassword)){
-                UserDao u = new UserDao();    
-                u.updateUser(id, firstName, secondName, workName, email, password, isAdmin);
-                response.sendRedirect("jsp/admin.jsp");
-            }else{
-                response.sendRedirect("jsp/admin.jsp");
-            }
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-
 
     /**
      * Handles the HTTP <code>POST</code> method.

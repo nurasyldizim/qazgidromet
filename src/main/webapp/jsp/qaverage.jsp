@@ -5,11 +5,11 @@
 --%>
 <%
     String user = null;
-    if (session.getAttribute("adminSession")==null) {
+    if (session.getAttribute("adminSession") == null) {
         response.sendRedirect("login.jsp");
-    } else if(session.getAttribute("adminSession").equals("admin") || session.getAttribute("adminSession").equals("user")) {
+    } else if (session.getAttribute("adminSession").equals("admin") || session.getAttribute("adminSession").equals("user")) {
         user = (String) session.getAttribute("emailSession");
-    }else{
+    } else {
         response.sendRedirect("login.jsp");
     }
 %>
@@ -38,119 +38,128 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     </head>
     <header><%
-                    request.setCharacterEncoding("UTF-8");
-                    int year = Year.now().getValue();
-                    String pnzName = request.getParameter("pnzName");
-                    String pnzId = request.getParameter("pnzId");
-                    int cityId = Integer.parseInt(request.getParameter("cityId"));
-                    String cityName = request.getParameter("cityName");
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate localDate = LocalDate.now();
-                %>
-		<div class="container text-center">
-			<div class="fh5co-navbar-brand">
-                            <a class="fh5co-logo" href="<%=request.getContextPath()%>/">Qazgidromet</a>
-                            <div style="text-align: right"><a><%=user%></a></div>
-                                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
-			</div>
-			<nav id="fh5co-main-nav" role="navigation">
-				<ul>
-                                    <li><a href="<%=request.getContextPath()%>/">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-                                
-                            <center>
-                                <div class="neato-header">
-                                    <h1><%=cityName%></h1>
-                                </div>
-                            </center>
-         <%
-            String month = request.getParameter("month");
-            request.setAttribute("monthId", month);
-            LinkedHashMap map = new LinkedHashMap();
-            map.put("1", "Январь");
-            map.put("2", "Февраль");
-            map.put("3", "Март");
-            map.put("4", "Апрель");
-            map.put("5", "Май");
-            map.put("6", "Июнь");
-            map.put("7", "Июль");
-            map.put("8", "Август");
-            map.put("9", "Сентябрь");
-            map.put("10", "Октябрь");
-            map.put("11", "Ноябрь");
-            map.put("12", "Декабрь");
-    request.setAttribute("MyMap", map);
-%>
+        request.setCharacterEncoding("UTF-8");
+        int year = Year.now().getValue();
+        String pnzName = request.getParameter("pnzName");
+        String pnzId = request.getParameter("pnzId");
+        int cityId = Integer.parseInt(request.getParameter("cityId"));
+        String cityName = request.getParameter("cityName");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.now();
+        %>
+        <div class="container text-center">
+            <div class="fh5co-navbar-brand">
+                <a class="fh5co-logo" href="#">Qazgidromet</a>
+                <div style="text-align: right"><a><%=user%></a></div>
+                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
+            </div>
+            <nav id="fh5co-main-nav" role="navigation">
+                <ul>
+                    <li><a href="<%=request.getContextPath()%>/jsp/index.jsp">Главная</a></li>
+                    <li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
+                    <li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
+                    <li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Прогноз q ср.м</a></li>
+                    <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
+                    <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <center>
-<select class="class-select" id="monthListId" onchange="refreshFunctionMonth('<%=pnzId %>', '<%=pnzName %>', '<%=cityId%>', '<%=cityName%>')">
-         <c:forEach items="${MyMap}" var="mapItem">
-             <option value="${mapItem.key}" ${mapItem.key eq monthId ? "selected": ""}>${mapItem.value}</option>
-         </c:forEach>
-</select>   
+        <div class="neato-header">
+            <h1><%=cityName%></h1>
+        </div>
     </center>
-<div class="table100 ver4 m-b-110">
-    <table id="table" border="1">
+    <%
+        String month = request.getParameter("month");
+        request.setAttribute("monthId", month);
+        LinkedHashMap map = new LinkedHashMap();
+        map.put("1", "Январь");
+        map.put("2", "Февраль");
+        map.put("3", "Март");
+        map.put("4", "Апрель");
+        map.put("5", "Май");
+        map.put("6", "Июнь");
+        map.put("7", "Июль");
+        map.put("8", "Август");
+        map.put("9", "Сентябрь");
+        map.put("10", "Октябрь");
+        map.put("11", "Ноябрь");
+        map.put("12", "Декабрь");
+        request.setAttribute("MyMap", map);
+    %>
+    <center>
+        <select class="class-select" id="monthListId" onchange="refreshFunctionMonth('<%=pnzId%>', '<%=pnzName%>', '<%=cityId%>', '<%=cityName%>')">
+            <c:forEach items="${MyMap}" var="mapItem">
+                <option value="${mapItem.key}" ${mapItem.key eq monthId ? "selected": ""}>${mapItem.value}</option>
+            </c:forEach>
+        </select>   
+    </center>
+    <div class="table100 ver4 m-b-110">
+        <table id="table" border="1">
             <tr class="row100 head"><th></th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-<%  
-            int monthInt = Integer.parseInt(month);
-            Date date = new Date();
-            int currentYear = Year.now().getValue();
-            int lastYear = Year.now().getValue()-1;
-            int monthCurrent = date.getMonth()+1;
-            if(monthInt > monthCurrent){
-                currentYear = currentYear-1;
-                lastYear = lastYear-1;
-            }
-            PnzDataDao pnzDataDao = new PnzDataDao();
-            ArrayList<PnzData>[] qAvglist = pnzDataDao.qAvgPnzDatas(monthInt, cityId);
-                for (int i = 0; i<4; i++) {
-                    Iterator iterQAvgList = qAvglist[i].iterator();
-                    Object[] objQAvg = (Object[]) iterQAvgList.next();
-            %>
+                    <%
+                        int monthInt = Integer.parseInt(month);
+                        Date date = new Date();
+                        int currentYear = Year.now().getValue();
+                        int lastYear = Year.now().getValue() - 1;
+                        int monthCurrent = date.getMonth() + 1;
+                        if (monthInt > monthCurrent) {
+                            currentYear = currentYear - 1;
+                            lastYear = lastYear - 1;
+                        }
+                        PnzDataDao pnzDataDao = new PnzDataDao();
+                        ArrayList<PnzData>[] qAvglist = pnzDataDao.qAvgPnzDatas(monthInt, cityId);
+                        for (int i = 0; i < 4; i++) {
+                            Iterator iterQAvgList = qAvglist[i].iterator();
+                            Object[] objQAvg = (Object[]) iterQAvgList.next();
+                    %>
             <tr class="row100">
                 <c:choose>
                     <c:when test = "${param.month == 1}">
-                        <%if(i==0){%>
-                        <td><%=map.get("12")%> <%=currentYear-2%></td>
-                        <%}if(i==1){%>
-                        <td><%=map.get(month)%> <%=currentYear-1%></td>
-                        <%}if(i==2){%>
-                        <td><%=map.get(String.valueOf(monthInt+1))%> <%=currentYear-1%></td>
-                        <%}if(i==3){%>
-                        <td><%=map.get("12")%> <%=currentYear-1%></td>
+                        <%if (i == 0) {%>
+                        <td><%=map.get("12")%> <%=currentYear - 2%></td>
+                        <%}
+                            if (i == 1) {%>
+                        <td><%=map.get(month)%> <%=currentYear - 1%></td>
+                        <%}
+                            if (i == 2) {%>
+                        <td><%=map.get(String.valueOf(monthInt + 1))%> <%=currentYear - 1%></td>
+                        <%}
+                            if (i == 3) {%>
+                        <td><%=map.get("12")%> <%=currentYear - 1%></td>
                         <%}%>
                     </c:when>
-         
+
                     <c:when test = "${param.month == 12}">
-                       <%if(i==0){%>
-                       <td><%=map.get(String.valueOf(monthInt-1))%> <%=currentYear-1%></td>
-                       <%}if(i==1){%>
-                       <td><%=map.get(month)%> <%=currentYear-1%></td>
-                       <%}if(i==2){%>
-                       <td><%=map.get("1")%> <%=currentYear%></td>
-                       <%}if(i==3){%>
-                       <td><%=map.get(String.valueOf(monthInt-1))%> <%=currentYear%></td>
-                       <%}%>
+                        <%if (i == 0) {%>
+                        <td><%=map.get(String.valueOf(monthInt - 1))%> <%=currentYear - 1%></td>
+                        <%}
+                           if (i == 1) {%>
+                        <td><%=map.get(month)%> <%=currentYear - 1%></td>
+                        <%}
+                           if (i == 2) {%>
+                        <td><%=map.get("1")%> <%=currentYear%></td>
+                        <%}
+                           if (i == 3) {%>
+                        <td><%=map.get(String.valueOf(monthInt - 1))%> <%=currentYear%></td>
+                        <%}%>
                     </c:when>
 
                     <c:otherwise>
-                       <%if(i==0){%>
-                       <td><%=map.get(String.valueOf(monthInt-1))%> <%=currentYear-1%></td>
-                       <%}if(i==1){%>
-                       <td><%=map.get(month)%> <%=currentYear-1%></td>
-                       <%}if(i==2){%>
-                       <td><%=map.get(String.valueOf(monthInt+1))%> <%=currentYear-1%></td>
-                       <%}if(i==3){%>
-                       <td><%=map.get(String.valueOf(monthInt-1))%> <%=currentYear%></td>
-                       <%}%>
+                        <%if (i == 0) {%>
+                        <td><%=map.get(String.valueOf(monthInt - 1))%> <%=currentYear - 1%></td>
+                        <%}
+                           if (i == 1) {%>
+                        <td><%=map.get(month)%> <%=currentYear - 1%></td>
+                        <%}
+                           if (i == 2) {%>
+                        <td><%=map.get(String.valueOf(monthInt + 1))%> <%=currentYear - 1%></td>
+                        <%}
+                           if (i == 3) {%>
+                        <td><%=map.get(String.valueOf(monthInt - 1))%> <%=currentYear%></td>
+                        <%}%>
                     </c:otherwise>
                 </c:choose>
                 <td><%=objQAvg[0]%></td>
@@ -172,7 +181,7 @@
                 <td><%=objQAvg[16]%></td>
                 <td><%=objQAvg[17]%></td>  
             </tr>
-     <%  }%>
+            <%  }%>
             <tr class="row100">
                 <td><%=map.get(month)%><%=currentYear%></td>
                 <td id="1id"><script>calculateQAvg(1);</script></td>
@@ -192,21 +201,21 @@
                 <td id="15id"><script>calculateQAvg(15);</script></td>
                 <td id="16id"><script>calculateQAvg(16);</script></td>
                 <td id="17id"><script>calculateQAvg(17);</script></td>
-                 <td id="18id"><script>calculateQAvg(18);</script></td> 
+                <td id="18id"><script>calculateQAvg(18);</script></td> 
             </tr>
-                
-            </table>
-</div>
 
-	<footer>
-		<div id="footer" class="fh5co-border-line">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+        </table>
+    </div>
+
+    <footer>
+        <div id="footer" class="fh5co-border-line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>

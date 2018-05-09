@@ -20,33 +20,33 @@ import org.hibernate.cfg.Configuration;
  * @author Nurasy Dizim
  */
 public class CityDao {
-      SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
-  Session session;
 
-   /* Method to  READ all the cities */
+    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    Session session;
 
+    /* Method to  READ all the cities */
     /**
      *
      * @return
      */
-    
-   public List<City> listCitis( ){
-      List<City> cityData = new ArrayList<City>();
-      Session session = HibernateUtil.getSessionFactory().openSession();
-      Transaction tx = null;
-      
-      try {
-         tx = session.beginTransaction();
-         cityData = session.createQuery("FROM City").list(); 
-         tx.commit();
-      } catch (HibernateException e) {
-         if (tx!=null) tx.rollback();
-         e.printStackTrace(); 
-      } finally {
-         session.close(); 
-      }
-      return cityData;
-   }
-   
-   
+    public List<City> listCitis() {
+        List<City> cityData = new ArrayList<City>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            cityData = session.createQuery("FROM City").list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return cityData;
+    }
+
 }

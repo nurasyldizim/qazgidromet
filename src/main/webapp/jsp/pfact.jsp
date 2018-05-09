@@ -33,8 +33,8 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-  </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        </script>
 
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datepicker.css">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/indicator.css">
@@ -56,85 +56,85 @@
                     String cityName = request.getParameter("cityName");
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.now();
-                %>
-		<div class="container text-center">
-			<div class="fh5co-navbar-brand">
-                            <a class="fh5co-logo" href="<%=request.getContextPath()%>/">Qazgidromet</a>
-                            <div style="text-align: right"><a><%=user%></a></div>
-                                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
-			</div>
-			<nav id="fh5co-main-nav" role="navigation">
-				<ul>
-                                    <li><a href="<%=request.getContextPath()%>/">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Фактический P</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-                         <center>
-                                <div class="neato-header">
-                                    <h1><%=cityName%></h1>
-                                </div>
-                            </center>
-        <%
-            String date = request.getParameter("date");
         %>
-        
-   <div class="date-picker">
-	<div class="input">
-            <div class="result">Дата: <span><%= date %></span></div>
-		<button><i class="fa fa-calendar"></i></button>
-	</div>
-	<div class="calendar"></div>
-</div>
-              <div id="js-meter" class="meter">
-  
-  <span class="meter-label">Фактический P на <%= date %></span>
-  <div class="meter-glass">
-    <div class="meter-display">
-      <div class="meter-range">
-        <div class="meter-range-item meter-range-item--1"></div>
-        <div class="meter-range-item meter-range-item--2"></div>
-        <div class="meter-range-item meter-range-item--3"></div>
-      </div>
-      <div class="meter-needle"></div>
-    </div>
-  </div>
-  
-</div>
-  <button onclick="generateExcel()">Export to Excel</button>
-  <br />
-  <br />
-  <div class="table100 ver4 m-b-110">
-                <table id="table" width="220" border="1">
-                    <tr><td colspan="20">Расчетная матрица для "P" г.<%=cityName%> </td></tr>
-        <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-        <script>var pnzListJS = ['Day'];</script>
-        <%
-            int rowCount = 0;
-            PnzDataDao pnzDataDao = new PnzDataDao();               
-            PnzDao pnzDao = new PnzDao();
-            List<Pnz> list = pnzDao.listPnzs(cityId);
-            for (Pnz p : list) {   
-                %>
-           <script>
-                pnzListJS.push('<%=p.getPnzName()%>');
-            </script>
-        <%
-                ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listPnzDatasToFP(p.getPnzId(),date); 
-            for (int i = 0; i<4; i++) {
-                    Iterator iterDataList = pnzDatalist[i].iterator();
-                    if(pnzDatalist[i].size()!=0){
-                    Object[] objData = (Object[]) iterDataList.next();
-                    rowCount++;
+        <div class="container text-center">
+            <div class="fh5co-navbar-brand">
+                <a class="fh5co-logo" href="#">Qazgidromet</a>
+                <div style="text-align: right"><a><%=user%></a></div>
+                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
+            </div>
+            <nav id="fh5co-main-nav" role="navigation">
+                <ul>
+                    <li><a href="<%=request.getContextPath()%>/jsp/index.jsp">Главная</a></li>
+                    <li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>">Заполнения</a></li>
+                    <li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Q ср.м</a></li>
+                    <li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
+                    <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
+                    <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Фактический P</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <center>
+        <div class="neato-header">
+            <h1><%=cityName%></h1>
+        </div>
+    </center>
+    <%
+        String date = request.getParameter("date");
     %>
 
-        <tr>
-            <td><%=p.getPnzName()%></td>
+    <div class="date-picker">
+        <div class="input">
+            <div class="result">Дата: <span><%= date %></span></div>
+            <button><i class="fa fa-calendar"></i></button>
+        </div>
+        <div class="calendar"></div>
+    </div>
+    <div id="js-meter" class="meter">
+
+        <span class="meter-label">Фактический P на <%= date %></span>
+        <div class="meter-glass">
+            <div class="meter-display">
+                <div class="meter-range">
+                    <div class="meter-range-item meter-range-item--1"></div>
+                    <div class="meter-range-item meter-range-item--2"></div>
+                    <div class="meter-range-item meter-range-item--3"></div>
+                </div>
+                <div class="meter-needle"></div>
+            </div>
+        </div>
+
+    </div>
+    <button onclick="generateExcel()">Export to Excel</button>
+    <br />
+    <br />
+    <div class="table100 ver4 m-b-110">
+        <table id="table" width="220" border="1">
+            <tr><td colspan="20">Расчетная матрица для "P" г.<%=cityName%> </td></tr>
+            <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
+            <script>var pnzListJS = ['Day'];</script>
+            <%
+                int rowCount = 0;
+                PnzDataDao pnzDataDao = new PnzDataDao();               
+                PnzDao pnzDao = new PnzDao();
+                List<Pnz> list = pnzDao.listPnzs(cityId);
+                for (Pnz p : list) {   
+            %>
+            <script>
+               pnzListJS.push('<%=p.getPnzName()%>');
+            </script>
+            <%
+                    ArrayList<PnzData>[] pnzDatalist = pnzDataDao.listPnzDatasToFP(p.getPnzId(),date); 
+                for (int i = 0; i<4; i++) {
+                        Iterator iterDataList = pnzDatalist[i].iterator();
+                        if(pnzDatalist[i].size()!=0){
+                        Object[] objData = (Object[]) iterDataList.next();
+                        rowCount++;
+            %>
+
+            <tr>
+                <td><%=p.getPnzName()%></td>
                 <%if(i==0){%>
                 <td>1:00</td>
                 <%}if(i==1){%>
@@ -144,28 +144,28 @@
                 <%}if(i==3){%>
                 <td>19:00</td>
                 <%}%>
-            <td><%=objData[0]%></td>
-            <td><%=objData[1]%></td>
-            <td><%=objData[2]%></td>
-            <td><%=objData[3]%></td>
-            <td><%=objData[4]%></td>
-            <td><%=objData[5]%></td>
-            <td><%=objData[6]%></td>
-            <td><%=objData[7]%></td>
-            <td><%=objData[8]%></td>
-            <td><%=objData[9]%></td>
-            <td><%=objData[10]%></td>
-            <td><%=objData[11]%></td>
-            <td><%=objData[12]%></td>
-            <td><%=objData[13]%></td>
-            <td><%=objData[14]%></td>
-            <td><%=objData[15]%></td>
-            <td><%=objData[16]%></td>
-            <td><%=objData[16]%></td>
-                
-        </tr>
-        <%}}}%>
-        <tr>
+                <td><%=objData[0]%></td>
+                <td><%=objData[1]%></td>
+                <td><%=objData[2]%></td>
+                <td><%=objData[3]%></td>
+                <td><%=objData[4]%></td>
+                <td><%=objData[5]%></td>
+                <td><%=objData[6]%></td>
+                <td><%=objData[7]%></td>
+                <td><%=objData[8]%></td>
+                <td><%=objData[9]%></td>
+                <td><%=objData[10]%></td>
+                <td><%=objData[11]%></td>
+                <td><%=objData[12]%></td>
+                <td><%=objData[13]%></td>
+                <td><%=objData[14]%></td>
+                <td><%=objData[15]%></td>
+                <td><%=objData[16]%></td>
+                <td><%=objData[16]%></td>
+
+            </tr>
+            <%}}}%>
+            <tr>
                 <td></td>
                 <td>макс</td>
                 <td id="2max"><script>calculateQMaxToP(2);</script></td>
@@ -209,7 +209,7 @@
                 <td id="18min"><script>calculateQMinToP(18);</script></td> 
                 <td id="19min"><script>calculateQMinToP(19);</script></td>
             </tr>
-        <tr>
+            <tr>
                 <td></td>
                 <td>ср</td>
                 <td id="2id"><script>calculateQAvgToP(2);</script></td>
@@ -342,36 +342,36 @@
                 <td></td>
                 <td></td>
             </tr>
-    </table>
-            <br>
-            <br>
-            <table id="table2" width="220" border="1">
-                <tr><td colspan="20">Расчетная матрица для "ПДК" </td></tr>
-                <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-            <%
-                for(int i =0; i<rowCount; i++){
-            %>
-                <tr>
-                    <td id="1<%=i%>"><script>showTableData(<%=i%>,1);</script></td>
-                    <td id="2<%=i%>"><script>showTableData(<%=i%>,2);</script></td>
-                    <td id="3<%=i%>"><script>calPDK(<%=i%>,3);</script></td>
-                    <td id="4<%=i%>"><script>calPDK(<%=i%>,4);</script></td>
-                    <td id="5<%=i%>"><script>calPDK(<%=i%>,5);</script></td>
-                    <td id="6<%=i%>"><script>calPDK(<%=i%>,6);</script></td>
-                    <td id="7<%=i%>"><script>calPDK(<%=i%>,7);</script></td>
-                    <td id="8<%=i%>"><script>calPDK(<%=i%>,8);</script></td>
-                    <td id="9<%=i%>"><script>calPDK(<%=i%>,9);</script></td>
-                    <td id="10<%=i%>"><script>calPDK(<%=i%>,10);</script></td>
-                    <td id="11<%=i%>"><script>calPDK(<%=i%>,11);</script></td>
-                    <td id="12<%=i%>"><script>calPDK(<%=i%>,12);</script></td>
-                    <td id="13<%=i%>"><script>calPDK(<%=i%>,13);</script></td>
-                    <td id="14<%=i%>"><script>calPDK(<%=i%>,14);</script></td>
-                    <td id="15<%=i%>"><script>calPDK(<%=i%>,15);</script></td>
-                    <td id="16<%=i%>"><script>calPDK(<%=i%>,16);</script></td>
-                    <td id="17<%=i%>"><script>calPDK(<%=i%>,17);</script></td>
-                    <td id="18<%=i%>"><script>calPDK(<%=i%>,18);</script></td>
-                    <td id="19<%=i%>"><script>calPDK(<%=i%>,19);</script></td>
-                    <td id="20<%=i%>"><script>calPDK(<%=i%>,20);</script></td>
+        </table>
+        <br>
+        <br>
+        <table id="table2" width="220" border="1">
+            <tr><td colspan="20">Расчетная матрица для "ПДК" </td></tr>
+            <tr><th></th><th>Срок</th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
+                    <%
+                        for(int i =0; i<rowCount; i++){
+                    %>
+            <tr>
+                <td id="1<%=i%>"><script>showTableData(<%=i%>, 1);</script></td>
+                <td id="2<%=i%>"><script>showTableData(<%=i%>, 2);</script></td>
+                <td id="3<%=i%>"><script>calPDK(<%=i%>, 3);</script></td>
+                <td id="4<%=i%>"><script>calPDK(<%=i%>, 4);</script></td>
+                <td id="5<%=i%>"><script>calPDK(<%=i%>, 5);</script></td>
+                <td id="6<%=i%>"><script>calPDK(<%=i%>, 6);</script></td>
+                <td id="7<%=i%>"><script>calPDK(<%=i%>, 7);</script></td>
+                <td id="8<%=i%>"><script>calPDK(<%=i%>, 8);</script></td>
+                <td id="9<%=i%>"><script>calPDK(<%=i%>, 9);</script></td>
+                <td id="10<%=i%>"><script>calPDK(<%=i%>, 10);</script></td>
+                <td id="11<%=i%>"><script>calPDK(<%=i%>, 11);</script></td>
+                <td id="12<%=i%>"><script>calPDK(<%=i%>, 12);</script></td>
+                <td id="13<%=i%>"><script>calPDK(<%=i%>, 13);</script></td>
+                <td id="14<%=i%>"><script>calPDK(<%=i%>, 14);</script></td>
+                <td id="15<%=i%>"><script>calPDK(<%=i%>, 15);</script></td>
+                <td id="16<%=i%>"><script>calPDK(<%=i%>, 16);</script></td>
+                <td id="17<%=i%>"><script>calPDK(<%=i%>, 17);</script></td>
+                <td id="18<%=i%>"><script>calPDK(<%=i%>, 18);</script></td>
+                <td id="19<%=i%>"><script>calPDK(<%=i%>, 19);</script></td>
+                <td id="20<%=i%>"><script>calPDK(<%=i%>, 20);</script></td>
             </tr>
             <%}%>
             <tr>
@@ -419,56 +419,56 @@
                 <td id="eachPdkN18"><script>countEachPdkN(18)</script></td>
                 <td id="eachPdkN19"><script>countEachPdkN(19)</script></td>
             </tr>
-            </table>
-            <br>
-            <br>
-            <table id="table3" width="220" border="1">
-                <tr><td colspan="2">Расчетная матрица для "ПДК" </td></tr>
-                <tr><th>P</th><th>СИ</th></tr>
-                <tr>
-                    <td id="calP"><script>calP();</script></td>
-                    <td id="calSI"><script>calSI();</script></td>
-                </tr>              
-            </table>
-  </div>
-            <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts(Array.apply(null,pnzListJS))">
-                <option value="2">Взвешенные частицы (пыль)</option>
-                <option value="3">Диоксид серы</option>
-                <option value="4">Сульфаты растворимые</option>
-                <option value="5">Оксид углерода</option>
-                <option value="6">Диоксид азота</option>
-                <option value="7">Оксид азота</option>
-                <option value="8">Озон</option>
-                <option value="9">Сероводород</option>
-                <option value="10">Фенол</option>
-                <option value="11">Фтористый водород</option>
-                <option value="12">Хлор</option>
-                <option value="13">Хлористый водород</option>
-                <option value="14">Аммиак</option>
-                <option value="15">Серная кислота и сульфаты</option>
-                <option value="16">Формальдегид</option>
-                <option value="17">Неорганические соединения мышьяка</option>
-                <option value="18">Хром шестивалентный</option>
-                <option value="19">Суммарные углеводороды</option>
+        </table>
+        <br>
+        <br>
+        <table id="table3" width="220" border="1">
+            <tr><td colspan="2">Расчетная матрица для "ПДК" </td></tr>
+            <tr><th>P</th><th>СИ</th></tr>
+            <tr>
+                <td id="calP"><script>calP();</script></td>
+                <td id="calSI"><script>calSI();</script></td>
+            </tr>              
+        </table>
+    </div>
+    <center> <select style="width: 500px;" class="class-select" id="chartSelect" onchange="drawCharts(Array.apply(null, pnzListJS))">
+            <option value="2">Взвешенные частицы (пыль)</option>
+            <option value="3">Диоксид серы</option>
+            <option value="4">Сульфаты растворимые</option>
+            <option value="5">Оксид углерода</option>
+            <option value="6">Диоксид азота</option>
+            <option value="7">Оксид азота</option>
+            <option value="8">Озон</option>
+            <option value="9">Сероводород</option>
+            <option value="10">Фенол</option>
+            <option value="11">Фтористый водород</option>
+            <option value="12">Хлор</option>
+            <option value="13">Хлористый водород</option>
+            <option value="14">Аммиак</option>
+            <option value="15">Серная кислота и сульфаты</option>
+            <option value="16">Формальдегид</option>
+            <option value="17">Неорганические соединения мышьяка</option>
+            <option value="18">Хром шестивалентный</option>
+            <option value="19">Суммарные углеводороды</option>
         </select></center>
-            <div class="chart">
-                <h2>Диаграмма по ПНЗ <%=cityName%></h2>
-                <h5 id="optionName"></h5>
-                <div id="bar-chart"></div>
-                <div id="png"></div>
+    <div class="chart">
+        <h2>Диаграмма по ПНЗ <%=cityName%></h2>
+        <h5 id="optionName"></h5>
+        <div id="bar-chart"></div>
+        <div id="png"></div>
+    </div>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/indicator.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/chart.js"></script>
+    <footer>
+        <div id="footer" class="fh5co-border-line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+                    </div>
+                </div>
             </div>
-            <script type="text/javascript" src="<%=request.getContextPath()%>/js/indicator.js"></script>
-            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-            <script type="text/javascript" src="<%=request.getContextPath()%>/js/chart.js"></script>
-   	<footer>
-		<div id="footer" class="fh5co-border-line">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+        </div>
+    </footer>
 </html>

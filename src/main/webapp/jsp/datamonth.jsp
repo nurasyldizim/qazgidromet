@@ -33,7 +33,7 @@
         <title>Расчеты</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
-        
+
     </head>
     <header><%
                     request.setCharacterEncoding("UTF-8");
@@ -45,77 +45,77 @@
                     String month = request.getParameter("month");
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate localDate = LocalDate.now();
-                %>
-		<div class="container text-center">
-			<div class="fh5co-navbar-brand">
-                            <a class="fh5co-logo" href="<%=request.getContextPath()%>/">Qazgidromet</a>
-                            <div style="text-align: right"><a><%=user%></a></div>
-                            <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
-			</div>
-			<nav id="fh5co-main-nav" role="navigation">
-				<ul>
-                                    <li><a href="<%=request.getContextPath()%>/">Главная</a></li>
-					<li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>" >Заполнения</a></li>
-					<li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Q ср.м</a></li>
-					<li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
-                                        <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
-                                        <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-                            <center>
-                                <div class="neato-header">
-                                    <h1><%=cityName%></h1>
-                                </div>
-                            </center>
-                 <div class="month-picker">
-  <fieldset class="month-picker-fieldset">
-    <input type="radio" name="month" value="jan" id="jan" onclick="selectMonth('datamonth.jsp?month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("1")){%>checked<%}%>>
-    <label for="jan" class="month-picker-label">Янв</label>
-    <input type="radio" name="month" value="feb" id="feb" onclick="selectMonth('datamonth.jsp?month=2&name=<%=URLEncoder.encode("Февраль", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("2")){%>checked<%}%>>
-    <label for="feb" class="month-picker-label">Фев</label>
-    <input type="radio" name="month" value="mar" id="mar" onclick="selectMonth('datamonth.jsp?month=3&name=<%=URLEncoder.encode("Март", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("3")){%>checked<%}%>>
-    <label for="mar" class="month-picker-label">Март</label>
-    <input type="radio" name="month" value="apr" id="apr" onclick="selectMonth('datamonth.jsp?month=4&name=<%=URLEncoder.encode("Апрель", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("4")){%>checked<%}%>>
-    <label for="apr" class="month-picker-label">Апр</label>
-    <input type="radio" name="month" value="may" id="may" onclick="selectMonth('datamonth.jsp?month=5&name=<%=URLEncoder.encode("Май", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("5")){%>checked<%}%>>
-    <label for="may" class="month-picker-label">Май</label>
-    <input type="radio" name="month" value="jun" id="jun" onclick="selectMonth('datamonth.jsp?month=6&name=<%=URLEncoder.encode("Июнь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("6")){%>checked<%}%>>
-    <label for="jun" class="month-picker-label">Июнь</label>
-    <input type="radio" name="month" value="jul" id="jul" onclick="selectMonth('datamonth.jsp?month=7&name=<%=URLEncoder.encode("Июль", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("7")){%>checked<%}%>>
-    <label for="jul" class="month-picker-label">Июль</label>
-    <input type="radio" name="month" value="aug" id="aug" onclick="selectMonth('datamonth.jsp?month=8&name=<%=URLEncoder.encode("Август", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("8")){%>checked<%}%>>
-    <label for="aug" class="month-picker-label">Авг</label>
-    <input type="radio" name="month" value="sep" id="sep" onclick="selectMonth('datamonth.jsp?month=9&name=<%=URLEncoder.encode("Сентябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("9")){%>checked<%}%>>
-    <label for="sep" class="month-picker-label">Сен</label>
-    <input type="radio" name="month" value="oct" id="oct" onclick="selectMonth('datamonth.jsp?month=10&name=<%=URLEncoder.encode("Октябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("10")){%>checked<%}%>>
-    <label for="oct" class="month-picker-label">Окт</label>
-    <input type="radio" name="month" value="nov" id="nov" onclick="selectMonth('datamonth.jsp?month=11&name=<%=URLEncoder.encode("Ноябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("11")){%>checked<%}%>>
-    <label for="nov" class="month-picker-label">Ноб</label>
-    <input type="radio" name="month" value="dec" id="dec" onclick="selectMonth('datamonth.jsp?month=12&name=<%=URLEncoder.encode("Декабрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("12")){%>checked<%}%>>
-    <label for="dec" class="month-picker-label">Дек</label>
-  </fieldset>
-</div>
-        <%  
-            String monthName = request.getParameter("name");
-            PnzDataDao pnzDataDao = new PnzDataDao();
-            PnzDao pnzDao = new PnzDao();
-            List<Pnz> list = pnzDao.listPnzs(cityId);
-            for (Pnz p : list) {
-                String pnzNameTemp = p.getPnzName();
         %>
+        <div class="container text-center">
+            <div class="fh5co-navbar-brand">
+                <a class="fh5co-logo" href="#">Qazgidromet</a>
+                <div style="text-align: right"><a><%=user%></a></div>
+                <div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutController">Выйти</a></div>
+            </div>
+            <nav id="fh5co-main-nav" role="navigation">
+                <ul>
+                    <li><a href="<%=request.getContextPath()%>/jsp/index.jsp">Главная</a></li>
+                    <li><a href="pnzdata.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&year=<%=year%>&cityName=<%=cityName%>" >Заполнения</a></li>
+                    <li><a href="datamonth.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId%>&cityName=<%=cityName%>" class="active">Q ср.м</a></li>
+                    <li><a href="qaverage.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&month=1&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогноз q ср.м</a></li>
+                    <li><a href="pprognoz.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Прогностический P</a></li>
+                    <li><a href="pfact.jsp?pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&date=<%=dtf.format(localDate)%>&cityId=<%=cityId%>&cityName=<%=cityName%>">Фактический P</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <center>
+        <div class="neato-header">
+            <h1><%=cityName%></h1>
+        </div>
+    </center>
+    <div class="month-picker">
+        <fieldset class="month-picker-fieldset">
+            <input type="radio" name="month" value="jan" id="jan" onclick="selectMonth('datamonth.jsp?month=1&name=<%=URLEncoder.encode("Январь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("1")){%>checked<%}%>>
+            <label for="jan" class="month-picker-label">Янв</label>
+            <input type="radio" name="month" value="feb" id="feb" onclick="selectMonth('datamonth.jsp?month=2&name=<%=URLEncoder.encode("Февраль", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("2")){%>checked<%}%>>
+            <label for="feb" class="month-picker-label">Фев</label>
+            <input type="radio" name="month" value="mar" id="mar" onclick="selectMonth('datamonth.jsp?month=3&name=<%=URLEncoder.encode("Март", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("3")){%>checked<%}%>>
+            <label for="mar" class="month-picker-label">Март</label>
+            <input type="radio" name="month" value="apr" id="apr" onclick="selectMonth('datamonth.jsp?month=4&name=<%=URLEncoder.encode("Апрель", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("4")){%>checked<%}%>>
+            <label for="apr" class="month-picker-label">Апр</label>
+            <input type="radio" name="month" value="may" id="may" onclick="selectMonth('datamonth.jsp?month=5&name=<%=URLEncoder.encode("Май", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("5")){%>checked<%}%>>
+            <label for="may" class="month-picker-label">Май</label>
+            <input type="radio" name="month" value="jun" id="jun" onclick="selectMonth('datamonth.jsp?month=6&name=<%=URLEncoder.encode("Июнь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("6")){%>checked<%}%>>
+            <label for="jun" class="month-picker-label">Июнь</label>
+            <input type="radio" name="month" value="jul" id="jul" onclick="selectMonth('datamonth.jsp?month=7&name=<%=URLEncoder.encode("Июль", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("7")){%>checked<%}%>>
+            <label for="jul" class="month-picker-label">Июль</label>
+            <input type="radio" name="month" value="aug" id="aug" onclick="selectMonth('datamonth.jsp?month=8&name=<%=URLEncoder.encode("Август", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("8")){%>checked<%}%>>
+            <label for="aug" class="month-picker-label">Авг</label>
+            <input type="radio" name="month" value="sep" id="sep" onclick="selectMonth('datamonth.jsp?month=9&name=<%=URLEncoder.encode("Сентябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("9")){%>checked<%}%>>
+            <label for="sep" class="month-picker-label">Сен</label>
+            <input type="radio" name="month" value="oct" id="oct" onclick="selectMonth('datamonth.jsp?month=10&name=<%=URLEncoder.encode("Октябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("10")){%>checked<%}%>>
+            <label for="oct" class="month-picker-label">Окт</label>
+            <input type="radio" name="month" value="nov" id="nov" onclick="selectMonth('datamonth.jsp?month=11&name=<%=URLEncoder.encode("Ноябрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("11")){%>checked<%}%>>
+            <label for="nov" class="month-picker-label">Ноб</label>
+            <input type="radio" name="month" value="dec" id="dec" onclick="selectMonth('datamonth.jsp?month=12&name=<%=URLEncoder.encode("Декабрь", "UTF-8")%>&cityId=<%=cityId %>&pnzId=<%=pnzId%>&pnzName=<%=pnzName%>&cityName=<%=cityName%>')" <% if(month.equals("12")){%>checked<%}%>>
+            <label for="dec" class="month-picker-label">Дек</label>
+        </fieldset>
+    </div>
+    <%  
+        String monthName = request.getParameter("name");
+        PnzDataDao pnzDataDao = new PnzDataDao();
+        PnzDao pnzDao = new PnzDao();
+        List<Pnz> list = pnzDao.listPnzs(cityId);
+        for (Pnz p : list) {
+            String pnzNameTemp = p.getPnzName();
+    %>
     <center><h3><%=monthName%></h3></center>
     <div class="table100 ver4 m-b-110">
-    <table id="table<%=pnzNameTemp%>" data-vertable="ver4" border="1">
+        <table id="table<%=pnzNameTemp%>" data-vertable="ver4" border="1">
             <tr class="row100 head"><th><%=pnzNameTemp%></th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-            <%
-                for(int i = 2012; i<2026; i++){
-                    List pnzAvglistByYear =  pnzDataDao.listPnzDatasByMonth(p.getPnzId(),Integer.parseInt(month), i);
-                    Iterator iterAvgListByYear = pnzAvglistByYear.iterator();
-                    Object[] objAvgByYear = (Object[]) iterAvgListByYear.next();
-                    if (objAvgByYear[0]!=null){
-            %>
+                    <%
+                        for(int i = 2012; i<2026; i++){
+                            List pnzAvglistByYear =  pnzDataDao.listPnzDatasByMonth(p.getPnzId(),Integer.parseInt(month), i);
+                            Iterator iterAvgListByYear = pnzAvglistByYear.iterator();
+                            Object[] objAvgByYear = (Object[]) iterAvgListByYear.next();
+                            if (objAvgByYear[0]!=null){
+                    %>
             <tr class="row100">
                 <td><%=i%></td>
                 <td><%=objAvgByYear[0]%></td>
@@ -157,26 +157,26 @@
                 <td id="15id<%=pnzNameTemp%>"><script>calculateAvg(15, "<%=pnzNameTemp%>");</script></td>
                 <td id="16id<%=pnzNameTemp%>"><script>calculateAvg(16, "<%=pnzNameTemp%>");</script></td>
                 <td id="17id<%=pnzNameTemp%>"><script>calculateAvg(17, "<%=pnzNameTemp%>");</script></td>
-                 <td id="18id<%=pnzNameTemp%>"><script>calculateAvg(18, "<%=pnzNameTemp%>");</script></td> 
+                <td id="18id<%=pnzNameTemp%>"><script>calculateAvg(18, "<%=pnzNameTemp%>");</script></td> 
             </tr>
-            </table>
+        </table>
     </div>
-        <%  }%>
-    
+    <%  }%>
+
     <%  
             PnzDataDao pnzDataDaoAll = new PnzDataDao();
-        %>
+    %>
     <center><h3>Среднее по всем ПНЗ за <%=monthName%></h3></center>
     <div class="table100 ver4 m-b-110">
-    <table id="table" data-vertable="ver4" border="1">
+        <table id="table" data-vertable="ver4" border="1">
             <tr class="row100 head"><th></th><th>Взвешенные частицы(пыль)</th><th>Диоксид серы</th><th>Сульфаты растворимые</th><th>Оксид углерода</th><th>Диоксид азота</th><th>Оксид азота</th><th>Озон</th><th>Сероводород</th><th>Фенол</th><th>Фтористый водород</th><th>Хлор</th><th>Хлористый водород</th><th>Аммиак</th><th>Серная кислота и сульфаты</th><th>Формальдегид</th><th>Неорганические соединения мышьяк</th><th>Хром шестивалентный</th><th>Суммарные углеводороды</th></tr>   
-            <%
-                for(int i = 2012; i<2026; i++){
-                    List pnzAvglistByYear =  pnzDataDaoAll.listAllPnzDatasByMonth(Integer.parseInt(month), i, cityId);
-                    Iterator iterAvgListByYear = pnzAvglistByYear.iterator();
-                    Object[] objAvgByYear = (Object[]) iterAvgListByYear.next();
-                    if (objAvgByYear[0]!=null){
-            %>
+                    <%
+                        for(int i = 2012; i<2026; i++){
+                            List pnzAvglistByYear =  pnzDataDaoAll.listAllPnzDatasByMonth(Integer.parseInt(month), i, cityId);
+                            Iterator iterAvgListByYear = pnzAvglistByYear.iterator();
+                            Object[] objAvgByYear = (Object[]) iterAvgListByYear.next();
+                            if (objAvgByYear[0]!=null){
+                    %>
             <tr class="row100">
                 <td><%=i%></td>
                 <td><%=objAvgByYear[0]%></td>
@@ -220,18 +220,18 @@
                 <td id="17id"><script>calculateAvgAll(17);</script></td>    
                 <td id="18id"><script>calculateAvgAll(18);</script></td> 
             </tr>
-            </table>
-</div>
+        </table>
+    </div>
 
- 	<footer>
-		<div id="footer" class="fh5co-border-line">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+    <footer>
+        <div id="footer" class="fh5co-border-line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <p>Научно-исследовательский центр РГП <a href="https://kazhydromet.kz/kk" target="_blank">"Казгидромет"</a>.<br>Made by students of <a href="http://iitu.kz" target="_blank">IITU</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>

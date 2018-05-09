@@ -6,8 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +27,7 @@ public class LogoutController extends HttpServlet {
         if (session != null) //If session is not null
         {
             session.invalidate(); //removes all session attributes bound to the session
-            request.setAttribute("errMessage", "Вы успешно вышли из системы!");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/login.jsp");
-            requestDispatcher.forward(request, response);
+            response.sendRedirect("jsp/login.jsp");
         }
     }
 }
