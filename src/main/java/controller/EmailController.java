@@ -87,7 +87,7 @@ public class EmailController extends HttpServlet {
             session.setAttribute("errMessage", "Почта не зарегистрирована в системе");
             response.sendRedirect("jsp/login.jsp");
         }
-        String from = "nmukazgidromet";
+        String from = "qazgidromet";
         String pass = "Nurlan123";
         String to = request.getParameter("email");
         String subject = "Пароль от системы Qazgidromet";
