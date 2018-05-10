@@ -1194,7 +1194,7 @@ input:checked + .year-picker-label:before {
 }
 .clone thead, .clone tfoot{background:transparent;}
 
-//animation tube
+\\animation tube
 #tube {
   fill: #000000;
   -webkit-transform: rotate(6deg) translateY(60px);
@@ -1385,7 +1385,7 @@ input:checked + .year-picker-label:before {
   }
 }
 
-//city header
+\\city header
 .neato-header {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);

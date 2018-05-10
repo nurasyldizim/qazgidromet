@@ -31,9 +31,11 @@ and open the template in the editor.
     <meta charset="utf-8">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
     <title>Qazgidromet</title>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>        
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/admin.js"></script>       
 </head>
 <body>
     <header>
@@ -142,8 +144,7 @@ and open the template in the editor.
 
 <div class="pop-up-container">
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/admin.js"></script>
-<footer>
+<footer> 
     <div id="footer" class="fh5co-border-line">
         <div class="container">
             <div class="row">

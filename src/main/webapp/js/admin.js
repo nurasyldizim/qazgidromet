@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+ $(document).ready(function(){
 $('.pop-up').hide(0);
 $('.pop-up-container').hide(0);
+
 $('.pop-up-button').click(function(){
   $('.pop-up-container').show(0);
   $('.pop-up').fadeIn(300);
@@ -71,3 +73,4 @@ $('.pop-up-delete').click(function(event){
        return false;
     }
 });
+ });
