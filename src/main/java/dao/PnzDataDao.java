@@ -306,7 +306,7 @@ public class PnzDataDao {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
+            SQLQuery query = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
             pnzData = query.list();
             tx.commit();
         } catch (HibernateException e) {
@@ -325,8 +325,8 @@ public class PnzDataDao {
      * @param month
      * @return
      */
-    public List[] qAvgPnzDatas(int month, int cityId) {
-        List []avgData = new ArrayList[4];
+    public ArrayList<PnzData>[] qAvgPnzDatas(int month, int cityId) {
+        ArrayList<PnzData>[] avgData = (ArrayList<PnzData>[]) new ArrayList[4];
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         Date date = new Date();
@@ -339,7 +339,7 @@ public class PnzDataDao {
         }
         try {
             tx = session.beginTransaction();
-            SQLQuery query1 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
+            SQLQuery query1 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
             if (month == 1) {
                 query1.setParameter("month", 12);
                 query1.setParameter("year", lastYear - 1);
@@ -347,18 +347,18 @@ public class PnzDataDao {
                 query1.setParameter("month", month - 1);
                 query1.setParameter("year", lastYear);
             }
-            avgData[0] = query1.list();
+            avgData[0] = (ArrayList<PnzData>) query1.list();
             tx.commit();
 
             tx = session.beginTransaction();
-            SQLQuery query2 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
+            SQLQuery query2 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
             query2.setParameter("month", month);
             query2.setParameter("year", lastYear);
-            avgData[1] = query2.list();
+            avgData[1] = (ArrayList<PnzData>) query2.list();
             tx.commit();
 
             tx = session.beginTransaction();
-            SQLQuery query3 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
+            SQLQuery query3 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
             if (month == 12) {
                 query3.setParameter("month", 1);
                 query3.setParameter("year", currentYear);
@@ -366,11 +366,11 @@ public class PnzDataDao {
                 query3.setParameter("month", month + 1);
                 query3.setParameter("year", lastYear);
             }
-            avgData[2] = query3.list();
+            avgData[2] = (ArrayList<PnzData>) query3.list();
             tx.commit();
 
             tx = session.beginTransaction();
-            SQLQuery query4 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
+            SQLQuery query4 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.do), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= :month AND YEAR(pnzDateTime)= :year AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + " ");
             if (month == 1) {
                 query4.setParameter("month", 12);
                 query4.setParameter("year", lastYear);
@@ -378,7 +378,7 @@ public class PnzDataDao {
                 query4.setParameter("month", month - 1);
                 query4.setParameter("year", currentYear);
             }
-            avgData[3] = query4.list();
+            avgData[3] = (ArrayList<PnzData>) query4.list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -412,14 +412,14 @@ public class PnzDataDao {
                 month = monthCurrent - 1;
                 year = lastYear;
             }
-            SQLQuery query1 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
+            SQLQuery query1 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
             avgData[0] = (ArrayList<PnzData>) query1.list();
             tx.commit();
 
             tx = session.beginTransaction();
             month = monthCurrent;
             year = lastYear;
-            SQLQuery query2 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
+            SQLQuery query2 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
             avgData[1] = (ArrayList<PnzData>) query2.list();
             tx.commit();
 
@@ -431,7 +431,7 @@ public class PnzDataDao {
                 month = monthCurrent + 1;
                 year = lastYear;
             }
-            SQLQuery query3 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
+            SQLQuery query3 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
             avgData[2] = (ArrayList<PnzData>) query3.list();
             tx.commit();
 
@@ -443,7 +443,7 @@ public class PnzDataDao {
                 month = monthCurrent - 1;
                 year = currentYear;
             }
-            SQLQuery query4 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, Pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
+            SQLQuery query4 = session.createSQLQuery("SELECT avg(pnzdata.bsh), avg(pnzdata.ds), avg(pnzdata.sr), avg(pnzdata.ou), avg(pnzdata.dO), avg(pnzdata.oa), avg(pnzdata.ozon), avg(pnzdata.serovodorod), avg(pnzdata.fenol), avg(pnzdata.fv), avg(pnzdata.hlor), avg(pnzdata.hv), avg(pnzdata.ammiak), avg(pnzdata.skIs), avg(pnzdata.formaldigid), avg(pnzdata.nsm), avg(pnzdata.hromSh), avg(pnzdata.sumU) FROM pnz_data pnzdata, pnz p WHERE MONTH(pnzDateTime)= " + month + " AND YEAR(pnzDateTime)= " + year + " AND pnzdata.pnzID=p.pnzID AND p.city_id=" + cityId + "");
             avgData[3] = (ArrayList<PnzData>) query4.list();
             tx.commit();
         } catch (HibernateException e) {
