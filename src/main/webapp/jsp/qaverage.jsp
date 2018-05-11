@@ -110,10 +110,10 @@
                             lastYear = lastYear - 1;
                         }
                         PnzDataDao pnzDataDao = new PnzDataDao();
-                        ArrayList<PnzData>[] qAvglist = pnzDataDao.qAvgPnzDatas(monthInt, cityId);
+                        List[] qAvgList = pnzDataDao.qAvgPnzDatas(monthInt, cityId);
                         for (int i = 0; i < 4; i++) {
-                            Iterator iterQAvgList = qAvglist[i].iterator();
-                            Object[] objQAvg = (Object[]) iterQAvgList.next();
+                            Iterator iter = qAvgList[i].iterator();
+                            Object[] objQAvg = (Object[]) iter.next();
                     %>
             <tr class="row100">
                 <c:choose>
@@ -181,7 +181,7 @@
                 <td><%=objQAvg[16]%></td>
                 <td><%=objQAvg[17]%></td>  
             </tr>
-            <%  }%>
+            <% }%>
             <tr class="row100">
                 <td><%=map.get(month)%><%=currentYear%></td>
                 <td id="1id"><script>calculateQAvg(1);</script></td>
