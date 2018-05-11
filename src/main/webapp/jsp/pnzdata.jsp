@@ -263,7 +263,6 @@
                     Object[] objMin = (Object[]) iterMin.next();
                     Object[] objMax = (Object[]) iterMax.next();
                     Object[] objAvg = (Object[]) iterAvg.next();
-                    if (objMin[0] != null) {
                 %>
                 <tr>
                     <td></td>
@@ -331,7 +330,6 @@
                     <td><%=objAvg[16]%></td>
                     <td><%=objAvg[17]%></td>
                 </tr> 
-                <% }%>
             </table>
         </form>
     </div>
