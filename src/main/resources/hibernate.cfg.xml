@@ -21,6 +21,10 @@
         <property name="hibernate.c3p0.acquireRetryAttempts">1</property>
         <property name="hibernate.c3p0.acquireRetryDelay">250</property>
     
+        <property name="connection.autoReconnect">true</property>
+        <property name="connection.autoReconnectForPools">true</property>
+        <property name="connection.is-connection-validation-required">true</property>
+    
     <mapping resource="model/City.hbm.xml"/>
     <mapping resource="model/PnzData.hbm.xml"/>
     <mapping resource="model/Pnz.hbm.xml"/>
